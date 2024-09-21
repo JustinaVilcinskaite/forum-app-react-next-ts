@@ -1,0 +1,10 @@
+.main {
+  height: 60px;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.4rem;
+}
