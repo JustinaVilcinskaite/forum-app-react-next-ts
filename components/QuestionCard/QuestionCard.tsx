@@ -5,21 +5,21 @@ import Link from "next/link";
 // pass the Question object to QuestionCardProps?
 
 type QuestionCardProps = {
-  // id: string;
+  id: string;
   // tite:string;
   questionText: string;
   date: string;
   //   question: Question;
 };
 
-const QuestionCard = ({ questionText, date }: QuestionCardProps) => {
+const QuestionCard = ({ id, questionText, date }: QuestionCardProps) => {
   // date
   const dateObj = new Date(date);
 
   const formattedDate = dateObj.toLocaleDateString();
 
   return (
-    <Link href="#" className={styles.main}>
+    <Link href={`/question/${id}`} className={styles.main}>
       <p>{questionText}</p>
       <h5>{formattedDate}</h5>
     </Link>

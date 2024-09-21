@@ -13,7 +13,7 @@ const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
         return (
           <QuestionCard
             key={question.id}
-            // id={question.id}
+            id={question.id}
             questionText={question.questionText}
             date={question.date}
           />
