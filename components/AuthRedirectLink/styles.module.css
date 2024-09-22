@@ -1,0 +1,21 @@
+.main h5 {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.linkText {
+  color: blue;
+  transition: color 0.3s ease;
+}
+
+.linkText:hover {
+  color: #7d7d83;
+}
+
+@media (max-width: 576px) {
+  .main h5 {
+    flex-direction: column;
+    text-align: center;
+  }
+}

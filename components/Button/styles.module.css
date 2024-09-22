@@ -1,0 +1,40 @@
+.main {
+  border: none;
+  padding: 0.9rem 1.5rem;
+  background-color: #708bf9;
+  border-radius: 5px;
+  width: 150px;
+  letter-spacing: 0.4px;
+  color: #fff;
+  align-self: center;
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: 0.3s ease;
+}
+
+.main:hover {
+  background-color: #4b6df7;
+}
+
+.danger {
+  background-color: rgb(187, 83, 83);
+  align-self: flex-start;
+}
+
+.danger:hover {
+  background-color: rgb(181, 38, 38);
+}
+
+.signOut {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  width: 110px;
+  transition: 0.3s;
+  box-shadow: none;
+}
+
+.signOut:hover {
+  background-color: transparent;
+  border-color: #4b6df7;
+}

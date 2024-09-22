@@ -11,6 +11,7 @@ type AnswerProps = {
 
 // TODO: delete answer functionality
 // TODO: like dislike answer functionality
+// TODO: no answers yet
 
 const Answer = ({ answerText, date }: AnswerProps) => {
   const dateObj = new Date(date);

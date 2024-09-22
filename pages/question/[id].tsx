@@ -4,13 +4,11 @@ import { useRouter } from "next/router";
 import { Question as QuestionProp } from "../../types/question";
 import PageTemplate from "../../components/PageTemplate/PageTemplate";
 import Question from "../../components/Question/Question";
-import { fetchQuestionWithAnswers as fetchQuestionWithAnswersApi } from "../../apiCalls/question";
+import { fetchQuestionWithAnswers as fetchQuestionWithAnswersApi } from "../../apiCalls/answer";
 // import axios from "axios";
 import AnswersWrapper from "../../components/AnswerWrapper/AnswerWrapper";
 
-// QuestionWithAnswersPage
-
-const QuestionPage = () => {
+const QuestionWithAnswersPage = () => {
   //?
   const [question, setQuestion] = useState<QuestionProp | null>(null);
   const [answers, setAnswers] = useState([]);
@@ -45,6 +43,7 @@ const QuestionPage = () => {
         {question && (
           <Question
             // id={question.id}
+            questionTitle={question.questionTitle}
             questionText={question.questionText}
             date={question.date}
           />
@@ -55,4 +54,4 @@ const QuestionPage = () => {
   );
 };
 
-export default QuestionPage;
+export default QuestionWithAnswersPage;

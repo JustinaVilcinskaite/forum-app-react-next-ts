@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 type QuestionProps = {
   //   id: string;
   // tite:string;
+  questionTitle: string;
   questionText: string;
   date: string;
   //   question: Question;
@@ -14,13 +15,14 @@ type QuestionProps = {
 // Answer question functionality
 // Question and QuestionCard very similar/reuse?
 
-const Question = ({ questionText, date }: QuestionProps) => {
+const Question = ({ questionTitle, questionText, date }: QuestionProps) => {
   const dateObj = new Date(date);
 
   const formattedDate = dateObj.toLocaleDateString();
 
   return (
     <div className={styles.main}>
+      <h4>{questionTitle}</h4>
       <p>{questionText}</p>
       <h5>{formattedDate}</h5>
     </div>

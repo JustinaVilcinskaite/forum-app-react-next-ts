@@ -8,3 +8,8 @@
   flex: 1;
   padding: 2rem;
 }
+
+.askQuestionLink {
+  padding: 0 2rem;
+  text-align: right;
+}

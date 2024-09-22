@@ -6,13 +6,18 @@ import Link from "next/link";
 
 type QuestionCardProps = {
   id: string;
-  // tite:string;
+  questionTitle: string;
   questionText: string;
   date: string;
   //   question: Question;
 };
 
-const QuestionCard = ({ id, questionText, date }: QuestionCardProps) => {
+const QuestionCard = ({
+  id,
+  questionTitle,
+  questionText,
+  date,
+}: QuestionCardProps) => {
   // date
   const dateObj = new Date(date);
 
@@ -20,6 +25,7 @@ const QuestionCard = ({ id, questionText, date }: QuestionCardProps) => {
 
   return (
     <Link href={`/question/${id}`} className={styles.main}>
+      <h4>{questionTitle}</h4>
       <p>{questionText}</p>
       <h5>{formattedDate}</h5>
     </Link>

@@ -14,6 +14,7 @@ const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
           <QuestionCard
             key={question.id}
             id={question.id}
+            questionTitle={question.questionTitle}
             questionText={question.questionText}
             date={question.date}
           />
