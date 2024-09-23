@@ -35,3 +35,16 @@ export const submitQuestion = async ({
   );
   return response;
 };
+
+export const deleteQuestion = async (id: string) => {
+  const headers = getAuthHeaders();
+
+  const response = await axios.delete(
+    `${process.env.SERVER_URL}/questions/${id}`,
+    {
+      headers,
+    }
+  );
+
+  return response;
+};
