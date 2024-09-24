@@ -9,6 +9,7 @@ type QuestionCardProps = {
   questionTitle: string;
   questionText: string;
   date: string;
+  // userId: string;
   //   question: Question;
 };
 

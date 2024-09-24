@@ -26,6 +26,7 @@ const LoginForm = () => {
       //  TODO: fix this
       if (response.status === 200) {
         cookie.set(process.env.JWT_KEY as string, response.data.token);
+
         setShowSuccess(true);
         setShowError(false);
         setTimeout(() => {

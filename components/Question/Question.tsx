@@ -1,63 +1,72 @@
 import styles from "./styles.module.css";
-import Button from "../Button/Button";
-import cookie from "js-cookie";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import Button from "../Button/Button";
+
+import { deleteQuestion as deleteQuestionApi } from "../../apiCalls/question";
+import { validateUser as validateUserApi } from "../../apiCalls/user";
+
+// Answer question functionality
+// Question and QuestionCard very similar/reuse?
+// TODO: add a MODAL
+// pass the Question object to type Props?
 
 type QuestionProps = {
   id: string;
   questionTitle: string;
   questionText: string;
   date: string;
+  userId: string; // user who posted the question
+
+  //   question: Question;
 };
 
-const Question = ({ id, questionTitle, questionText, date }: QuestionProps) => {
-  const dateObj = new Date(date);
-  const formattedDate = dateObj.toLocaleDateString();
-
+const Question = ({
+  id,
+  questionTitle,
+  questionText,
+  date,
+  userId,
+}: QuestionProps) => {
+  // ?
+  const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
+  const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const router = useRouter();
-  // const jwt = cookie.get(process.env.JWT_KEY as string);
 
-  const jwt = cookie.get("forum_app_jwt");
+  const validateUser = async () => {
+    try {
+      // const headers = {
+      //   authorization: jwt,
+      // };
 
-  // const validateUser = async () => {
-  //   try {
-  //     const headers = {
-  //       authorization: jwt,
-  //     };
+      // const response = await axios.get(
+      //   `${process.env.SERVER_URL}/login/validate`,
+      //   {
+      //     headers,
+      //   }
+      // );
 
-  //     const response = await axios.get(
-  //       `${process.env.SERVER_URL}/login/validate`,
-  //       {
-  //         headers,
-  //       }
-  //     );
+      const response = await validateUserApi();
 
-  //     if (response.status === 200) {
+      if (response.status === 200) {
+        setUserLoggedIn(true);
+        setLoggedInUserId(response.data.userId);
+      }
 
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+      //  setUserLoggedIn(true);
+      //   setLoggedInUserId(response.data.userId);
+    } catch (err) {
+      console.log("Error in validation:", err);
+    }
+  };
 
-  // useEffect(() => {
-  //   validateUser();
-  // }, []);
+  useEffect(() => {
+    validateUser();
+  }, []);
 
   const deleteQuestion = async () => {
     try {
-      const headers = {
-        authorization: jwt,
-      };
-
-      const response = await axios.delete(
-        `${process.env.SERVER_URL}/questions/${id}`,
-        {
-          headers,
-        }
-      );
+      const response = await deleteQuestionApi(id);
 
       if (response.status === 200) {
         router.push("/");
@@ -69,16 +78,20 @@ const Question = ({ id, questionTitle, questionText, date }: QuestionProps) => {
 
   return (
     <div className={styles.main}>
-      <h4>{questionTitle}</h4>
-      <p>{questionText}</p>
-      <h5>{formattedDate}</h5>
+      <div className={styles.qustionContent}>
+        <h4>{questionTitle}</h4>
+        <p>{questionText}</p>
+        <h5>{new Date(date).toLocaleDateString()}</h5>
+      </div>
 
-      <Button
-        title="Delete"
-        onClick={() => deleteQuestion()}
-        isLoading={false}
-        type="DANGER"
-      />
+      {isUserLoggedIn && loggedInUserId === userId && (
+        <Button
+          title="Delete"
+          onClick={() => deleteQuestion()}
+          isLoading={false}
+          type="DANGER"
+        />
+      )}
     </div>
   );
 };

@@ -42,10 +42,11 @@ const QuestionWithAnswersPage = () => {
       <>
         {question && (
           <Question
-            // id={question.id}
+            id={question.id}
             questionTitle={question.questionTitle}
             questionText={question.questionText}
             date={question.date}
+            userId={question.userId}
           />
         )}
         <AnswersWrapper answers={answers} />

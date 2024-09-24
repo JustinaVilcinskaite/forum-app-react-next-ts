@@ -48,7 +48,7 @@ import Footer from "../Footer/Footer";
 //   //   validateUser();
 //   // }, []);
 
-//   // kazkaip keistai funkcionuoja
+//
 //   return (
 //     <div className={styles.wrapper}>
 //       <Header logo="Forum logo" />

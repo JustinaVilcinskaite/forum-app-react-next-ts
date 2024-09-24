@@ -17,6 +17,7 @@ const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
             questionTitle={question.questionTitle}
             questionText={question.questionText}
             date={question.date}
+            // userId={question.userId}
           />
         );
       })}
