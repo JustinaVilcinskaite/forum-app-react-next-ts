@@ -1,7 +1,38 @@
 import styles from "./styles.module.css";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+type PageTemplateProps = {
+  children: ReactNode;
+};
+
+const PageTemplate = ({ children }: PageTemplateProps) => {
+  const router = useRouter();
+
+  const hiddenPaths = ["/login", "/signup", "/post-question"];
+
+  const displayAskQuestionLink = !hiddenPaths.includes(router.pathname);
+
+  return (
+    <div className={styles.wrapper}>
+      <Header logo="Forum logo" />
+      {/* maybe create a differenet compoenent for links */}
+      {displayAskQuestionLink && (
+        <Link href="/post-question" className={styles.askQuestionLink}>
+          Ask Question
+        </Link>
+      )}
+
+      <div className={styles.main}>{children}</div>
+      <Footer copyrightText="&copy; Forum" />
+    </div>
+  );
+};
+
+export default PageTemplate;
 
 // import { useRouter } from "next/router";
 // import { validateUser as validateUserApi } from "../../apiCalls/user";
@@ -63,59 +94,59 @@ import Footer from "../Footer/Footer";
 
 // export default PageTemplate;
 
-type PageTemplateProps = {
-  children: ReactNode;
-};
+// type PageTemplateProps = {
+//   children: ReactNode;
+// };
 
-const PageTemplate = ({ children }: PageTemplateProps) => {
-  // const [isUserLoggedIn, setUserLoggedIn] = useState(false);
+// const PageTemplate = ({ children }: PageTemplateProps) => {
+// const [isUserLoggedIn, setUserLoggedIn] = useState(false);
 
-  // const router = useRouter();
+// const router = useRouter();
 
-  // const validateUser = async () => {
-  //   try {
-  //     const response = await validateUserApi();
+// const validateUser = async () => {
+//   try {
+//     const response = await validateUserApi();
 
-  //     if (response.status !== 200) {
-  //       router.push("/login");
-  //     }
+//     if (response.status !== 200) {
+//       router.push("/login");
+//     }
 
-  //     // setUserLoggedIn(true);
-  //   } catch (err) {
-  //     router.push("/login");
-  //     console.log(err);
-  //   }
-  // };
+//     // setUserLoggedIn(true);
+//   } catch (err) {
+//     router.push("/login");
+//     console.log(err);
+//   }
+// };
 
-  // useEffect(() => {
-  //   validateUser();
-  // }, []);
+// useEffect(() => {
+//   validateUser();
+// }, []);
 
-  // useEffect(() => {
-  //   // Check if the current route is login or sign-up
-  //   if (
-  //     router.asPath !== "/login" &&
-  //     router.asPath !== "/signup" &&
-  //     router.asPath !== "/"
-  //   ) {
-  //     validateUser();
-  //   }
-  //   // else {
-  //   //   setUserLoggedIn(false);
-  //   // }
-  // }, [router.asPath]);
+// useEffect(() => {
+//   // Check if the current route is login or sign-up
+//   if (
+//     router.asPath !== "/login" &&
+//     router.asPath !== "/signup" &&
+//     router.asPath !== "/"
+//   ) {
+//     validateUser();
+//   }
+//   // else {
+//   //   setUserLoggedIn(false);
+//   // }
+// }, [router.asPath]);
 
-  // kazkaip keistai funkcionuoja
-  return (
-    <div className={styles.wrapper}>
-      <Header logo="Forum logo" />
-      {/* <Link href="/post-question" className={styles.askQuestionLink}>
-        Ask Question
-      </Link> */}
-      <div className={styles.main}>{children}</div>
-      <Footer copyrightText="&copy; Forum" />
-    </div>
-  );
-};
+// kazkaip keistai funkcionuoja
+//   return (
+//     <div className={styles.wrapper}>
+//       <Header logo="Forum logo" />
+//       {/* <Link href="/post-question" className={styles.askQuestionLink}>
+//         Ask Question
+//       </Link> */}
+//       <div className={styles.main}>{children}</div>
+//       <Footer copyrightText="&copy; Forum" />
+//     </div>
+//   );
+// };
 
-export default PageTemplate;
+// export default PageTemplate;

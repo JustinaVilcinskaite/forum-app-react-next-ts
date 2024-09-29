@@ -5,11 +5,9 @@ import SignUpForm from "../../components/SignUpForm/SignUpForm";
 
 const SignupPage = () => {
   return (
-    <>
-      <PageTemplate>
-        <SignUpForm />
-      </PageTemplate>
-    </>
+    <PageTemplate>
+      <SignUpForm />
+    </PageTemplate>
   );
 };
 

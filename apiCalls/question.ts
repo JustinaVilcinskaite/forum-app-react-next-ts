@@ -1,11 +1,5 @@
 import axios from "axios";
-import { getAuthHeaders } from "../utils/api";
-
-export const fetchQuestions = async () => {
-  const response = await axios.get(`${process.env.SERVER_URL}/questions`);
-
-  return response;
-};
+import { getAuthHeaders } from "../utils/authHeaders";
 
 // ?
 type SumbitQuestionProps = {
@@ -33,6 +27,12 @@ export const submitQuestion = async ({
     body,
     { headers }
   );
+  return response;
+};
+
+export const fetchQuestions = async () => {
+  const response = await axios.get(`${process.env.SERVER_URL}/questions`);
+
   return response;
 };
 

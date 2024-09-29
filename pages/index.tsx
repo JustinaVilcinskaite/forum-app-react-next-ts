@@ -5,12 +5,14 @@ import { Question } from "../types/question";
 import { fetchQuestions as fetchQuestionsApi } from "../apiCalls/question";
 
 const MainPage = () => {
+  //
   const [questions, setQuestions] = useState<Question[]>([]);
 
   const fetchQuestions = async () => {
     try {
       const response = await fetchQuestionsApi();
 
+      // istrinti console
       console.log(response.data.questions);
       setQuestions(response.data.questions);
     } catch (err) {
@@ -23,11 +25,9 @@ const MainPage = () => {
   }, []);
 
   return (
-    <>
-      <PageTemplate>
-        <QuestionsWrapper questions={questions} />
-      </PageTemplate>
-    </>
+    <PageTemplate>
+      <QuestionsWrapper questions={questions} />
+    </PageTemplate>
   );
 };
 

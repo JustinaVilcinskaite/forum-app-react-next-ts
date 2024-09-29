@@ -7,6 +7,7 @@ import Button from "../Button/Button";
 import AuthRedirectLink from "../AuthRedirectLink/AuthRedirectLink";
 
 // TODO: ux validation
+// TODO: rethink the succes and error
 
 const LoginForm = () => {
   const router = useRouter();
@@ -31,9 +32,8 @@ const LoginForm = () => {
         setShowError(false);
         setTimeout(() => {
           router.push("/");
-        }, 2000);
+        }, 1000);
 
-        console.log(response);
         setButtonLoading(false);
       }
     } catch (err) {

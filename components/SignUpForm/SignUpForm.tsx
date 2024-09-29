@@ -32,8 +32,7 @@ const SignUpForm = () => {
         setShowError(false);
         setTimeout(() => {
           router.push("/login");
-        }, 2000);
-        console.log(response);
+        }, 1000);
       }
     } catch (err) {
       console.error("Sign Up Error", err);

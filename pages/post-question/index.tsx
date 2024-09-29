@@ -3,21 +3,19 @@ import PageTemplate from "../../components/PageTemplate/PageTemplate";
 
 // const PostQuestionPage = () => {
 //   return (
-//     <>
+//
 //       <PageTemplate isProtected={true}>
 //         <QuestionForm />
 //       </PageTemplate>
-//     </>
+//
 //   );
 // };
 
 const PostQuestionPage = () => {
   return (
-    <>
-      <PageTemplate>
-        <QuestionForm />
-      </PageTemplate>
-    </>
+    <PageTemplate>
+      <QuestionForm />
+    </PageTemplate>
   );
 };
 
