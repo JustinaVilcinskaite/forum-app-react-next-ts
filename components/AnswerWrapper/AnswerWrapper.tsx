@@ -6,12 +6,14 @@ type AnswersWrapperProps = {
   answers: AnswerProps[];
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
+  refetchData: () => void;
 };
 
 const AnswersWrapper = ({
   answers,
   loggedInUserId,
   isUserLoggedIn,
+  refetchData,
 }: AnswersWrapperProps) => {
   return (
     <div className={styles.main}>
@@ -23,10 +25,12 @@ const AnswersWrapper = ({
             answerText={answer.answerText}
             date={answer.date}
             gainedLikesNumber={answer.gainedLikesNumber}
+            // questionId={answer.questionId}
             // ?????? do i need to pas the userId here
             userId={answer.userId}
             loggedInUserId={loggedInUserId}
             isUserLoggedIn={isUserLoggedIn}
+            refetchData={refetchData}
           />
         ))
       ) : (

@@ -2,7 +2,7 @@ import axios from "axios";
 import { getAuthHeaders } from "../utils/authHeaders";
 
 // ?
-type SumbitQuestionProps = {
+type PostQuestionProps = {
   questionTitle: string;
   questionText: string;
 };
@@ -11,10 +11,10 @@ type SumbitQuestionProps = {
 //   question: Question;
 // };
 
-export const submitQuestion = async ({
+export const postQuestion = async ({
   questionTitle,
   questionText,
-}: SumbitQuestionProps) => {
+}: PostQuestionProps) => {
   const body = {
     questionTitle: questionTitle,
     questionText: questionText,

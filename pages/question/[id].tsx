@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-// change QuestionProp name
-import { Question as QuestionProp } from "../../types/question";
+import { Question } from "../../types/question";
+import { Answer } from "../../types/answer";
 import PageTemplate from "../../components/PageTemplate/PageTemplate";
 import QuestionFullView from "../../components/QuestionFullView/QuestionFullView";
 import { fetchQuestionWithAnswers as fetchQuestionWithAnswersApi } from "../../apiCalls/answer";
-// import axios from "axios";
 import AnswersWrapper from "../../components/AnswerWrapper/AnswerWrapper";
 import AnswerForm from "../../components/AnswerForm/AnswerForm";
 import { validateUser as validateUserApi } from "../../apiCalls/user";
 
 const QuestionWithAnswersPage = () => {
   //?
-  const [question, setQuestion] = useState<QuestionProp | null>(null);
-  // kodel taip pat nerasom?
-  const [answers, setAnswers] = useState([]);
+  const [question, setQuestion] = useState<Question | null>(null);
+  // const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState<Answer[]>([]);
 
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
@@ -25,7 +24,6 @@ const QuestionWithAnswersPage = () => {
     try {
       const response = await fetchQuestionWithAnswersApi(id);
 
-      console.log(response.data);
       setQuestion(response.data.question);
       setAnswers(response.data.answers);
     } catch (err) {
@@ -33,6 +31,7 @@ const QuestionWithAnswersPage = () => {
     }
   };
 
+  // ar nepertekline validacija like/dislike ir postAnswer setLoggedInUserId(response.data.userId);
   const validateUser = async () => {
     try {
       const response = await validateUserApi();
@@ -53,13 +52,12 @@ const QuestionWithAnswersPage = () => {
     }
   }, [router.query.id]);
 
-  // problem? WHY?
   // useEffect(() => {
   //   router.query.id && fetchQuestionWithAnswers(router.query.id as string);
+  //   validateUser();
   // }, [router.query.id]);
 
-  // perziureti sita gal cia nesamone darau bet veikia
-  // infinite loop
+  // infinite loop??
   // useEffect(() => {
   //   router.query.id && fetchQuestionWithAnswers(router.query.id as string);
   // }, [answers]);
@@ -83,12 +81,18 @@ const QuestionWithAnswersPage = () => {
           answers={answers}
           loggedInUserId={loggedInUserId}
           isUserLoggedIn={isUserLoggedIn}
+          refetchData={() =>
+            fetchQuestionWithAnswers(router.query.id as string)
+          }
         />
 
         {/* ??????? */}
         <AnswerForm
           questionId={router.query.id as string}
           isUserLoggedIn={isUserLoggedIn}
+          refetchData={() =>
+            fetchQuestionWithAnswers(router.query.id as string)
+          }
         />
       </>
     </PageTemplate>

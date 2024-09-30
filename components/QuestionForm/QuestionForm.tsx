@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Button from "../Button/Button";
-import { submitQuestion as submitQuestionApi } from "../../apiCalls/question";
+import { postQuestion as postQuestionApi } from "../../apiCalls/question";
 import { validateUser as validateUserApi } from "../../apiCalls/user";
 
 const QuestionForm = () => {
@@ -15,6 +15,7 @@ const QuestionForm = () => {
   const router = useRouter();
 
   //   later refactor, DRY
+  // ar cia palikti funkcija
 
   const validateUser = async () => {
     try {
@@ -31,9 +32,9 @@ const QuestionForm = () => {
     }
   };
 
-  const submitQuestion = async () => {
+  const postQuestion = async () => {
     try {
-      const response = await submitQuestionApi({
+      const response = await postQuestionApi({
         questionTitle,
         questionText,
       });
@@ -71,19 +72,13 @@ const QuestionForm = () => {
       />
       <textarea
         value={questionText}
-        placeholder="Question"
+        placeholder="Write your question..."
         onChange={(e) => {
           setQuestionText(e.target.value);
         }}
       />
 
-      <Button
-        isLoading={false}
-        title="Sumbit"
-        onClick={() => {
-          submitQuestion();
-        }}
-      />
+      <Button isLoading={false} title="Sumbit" onClick={postQuestion} />
 
       {/* create a  reusable message component */}
 
