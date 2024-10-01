@@ -75,7 +75,12 @@ const AnswerForm = ({ isUserLoggedIn, refetchData }: AnswerFormProps) => {
             placeholder="Write your answer..."
           />
 
-          <Button isLoading={false} title="Sumbit" onClick={postAnswer} />
+          <Button
+            isLoading={false}
+            isActive={false}
+            title="Sumbit"
+            onClick={postAnswer}
+          />
 
           {message && <h4 className={styles.message}>{message}</h4>}
         </div>

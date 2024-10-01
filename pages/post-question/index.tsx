@@ -13,7 +13,7 @@ import PageTemplate from "../../components/PageTemplate/PageTemplate";
 
 const PostQuestionPage = () => {
   return (
-    <PageTemplate>
+    <PageTemplate isProtected={true}>
       <QuestionForm />
     </PageTemplate>
   );

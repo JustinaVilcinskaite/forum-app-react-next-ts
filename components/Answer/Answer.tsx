@@ -202,13 +202,177 @@
 
 // export default Answer;
 
+// optimistic ui
+
+// import styles from "./styles.module.css";
+// import likeBtn from "../../assets/like-btn.svg";
+// import dislikeBtn from "../../assets/dislike-btn.svg";
+
+// import { useEffect, useState } from "react";
+// import Button from "../Button/Button";
+// import { deleteAnswer as deleteAnswerApi } from "../../apiCalls/answer";
+// import { postLikeAnswer } from "../../apiCalls/answer";
+// import { postDislikeAnswer } from "../../apiCalls/answer";
+
+// // pass the Answer object to type Props?
+// // nesuprantu like ir dislike funcionavimo, veliau grziti
+
+// type AnswerProps = {
+//   id: string;
+//   answerText: string;
+//   date: string;
+//   gainedLikesNumber: number;
+//   // questionId: string;
+//   userId: string;
+//   loggedInUserId: string | null;
+//   isUserLoggedIn: boolean;
+//   refetchData: () => void;
+// };
+
+// const Answer = ({
+//   id,
+//   answerText,
+//   date,
+//   gainedLikesNumber,
+//   userId,
+//   loggedInUserId,
+//   isUserLoggedIn,
+//   refetchData,
+// }: AnswerProps) => {
+//   const dateObj = new Date(date);
+//   const formattedDate = dateObj.toLocaleDateString();
+
+//   // ?
+//   const [netScoreLikes, setNetScoreLikes] = useState(gainedLikesNumber);
+//   const [hasLiked, setHasLiked] = useState(false);
+//   const [hasDisliked, setHasDisliked] = useState(false);
+
+//   const [message, setMessage] = useState("");
+
+//   const deleteAnswer = async () => {
+//     try {
+//       const response = await deleteAnswerApi(id);
+
+//       if (response.status === 200) {
+//         refetchData();
+//       }
+//     } catch (err) {
+//       console.log("Error deleting answer", err);
+//     }
+//   };
+
+//   // pavadinimas?
+//   // tvarkyti visa front end like/dislike funcionaluma
+//   const handleLike = async () => {
+//     try {
+//       if (!isUserLoggedIn) {
+//         setMessage("Log in to interact!");
+//         return;
+//       }
+
+//       // gal nereikalinga
+//       if (hasLiked) {
+//         return;
+//       }
+
+//       setNetScoreLikes((prevState) => prevState + 1);
+//       setHasLiked(true);
+//       setHasDisliked(false);
+
+//       const response = await postLikeAnswer(id);
+
+//       // ?
+//       if (response.status !== 200) {
+//         throw new Error("Failed to like the answer");
+//       }
+//     } catch (err) {
+//       setNetScoreLikes((prevState) => prevState - 1);
+//       setHasLiked(false);
+//       console.log("Error liking the answer:", err);
+//     }
+//   };
+
+//   const handleDislike = async () => {
+//     if (!isUserLoggedIn) {
+//       setMessage("Log in to interact!");
+//       return;
+//     }
+
+//     // gal nereikalinga
+//     if (hasDisliked) {
+//       return;
+//     }
+
+//     // Optimistic UI update
+//     setNetScoreLikes((prevState) => prevState - 1);
+//     setHasLiked(false);
+//     setHasDisliked(true);
+
+//     try {
+//       const response = await postDislikeAnswer(id);
+
+//       if (response.status !== 200) {
+//         throw new Error("Failed to dislike the answer");
+//       }
+//     } catch (err) {
+//       setNetScoreLikes((prevState) => prevState + 1);
+//       setHasDisliked(false);
+//       console.log("Error disliking the answer:", err);
+//     }
+//   };
+
+//   return (
+//     <div className={styles.main}>
+//       <p>{answerText}</p>
+//       <h5>{formattedDate}</h5>
+
+//       {isUserLoggedIn && loggedInUserId === userId && (
+//         <Button
+//           isActive={false}
+//           title="Delete"
+//           onClick={() => deleteAnswer()}
+//           isLoading={false}
+//           type="DANGER"
+//         />
+//       )}
+
+//       <div className={styles.btnWrapper}>
+//         <Button
+//           isActive={false}
+//           onClick={handleLike}
+//           icon={likeBtn.src}
+//           type="LIKE"
+//           isLoading={false}
+//         />
+
+//         <div className={styles.votes}>{netScoreLikes}</div>
+
+//         <Button
+//           isActive={false}
+//           onClick={handleDislike}
+//           icon={dislikeBtn.src}
+//           type="DISLIKE"
+//           isLoading={false}
+//         />
+//       </div>
+
+//       <p>{message}</p>
+//     </div>
+//   );
+// };
+
+// export default Answer;
+
 import styles from "./styles.module.css";
-import LikeDislikeButton from "../LikeDislikeButton/LikeDislikeButton";
+import likeBtn from "../../assets/like-btn.svg";
+import dislikeBtn from "../../assets/dislike-btn.svg";
+
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import { deleteAnswer as deleteAnswerApi } from "../../apiCalls/answer";
 import { postLikeAnswer } from "../../apiCalls/answer";
 import { postDislikeAnswer } from "../../apiCalls/answer";
+import axios from "axios";
 
 // pass the Answer object to type Props?
 // nesuprantu like ir dislike funcionavimo, veliau grziti
@@ -257,33 +421,43 @@ const Answer = ({
     }
   };
 
-  // pavadinimas?
-  // tvarkyti visa front end like/dislike funcionaluma
-  const handleLike = async () => {
+  const fetchNetScore = async () => {
     try {
-      if (!isUserLoggedIn) {
-        setMessage("Log in to interact!");
-        return;
+      const response = await axios.get(
+        `${process.env.SERVER_URL}/answers/${id}/likes`
+      );
+
+      if (response.status === 200) {
+        setNetScoreLikes(response.data.gainedLikesNumber);
+      } else {
+        throw new Error("Failed to fetch net score");
       }
+    } catch (err) {
+      console.log("Error fetching net score:", err);
+    }
+  };
 
-      // gal nereikalinga
-      if (hasLiked) {
-        return;
-      }
+  const handleLike = async () => {
+    if (!isUserLoggedIn) {
+      setMessage("Log in to interact!");
+      return;
+    }
 
-      setNetScoreLikes((prevState) => prevState + 1);
-      setHasLiked(true);
-      setHasDisliked(false);
+    if (hasLiked) {
+      return;
+    }
 
+    try {
       const response = await postLikeAnswer(id);
 
-      // ?
-      if (response.status !== 200) {
+      if (response.status === 200) {
+        await fetchNetScore(); // Fetch the updated net score after liking
+        setHasLiked(true);
+        setHasDisliked(false);
+      } else {
         throw new Error("Failed to like the answer");
       }
     } catch (err) {
-      setNetScoreLikes((prevState) => prevState - 1);
-      setHasLiked(false);
       console.log("Error liking the answer:", err);
     }
   };
@@ -294,29 +468,24 @@ const Answer = ({
       return;
     }
 
-    // gal nereikalinga
     if (hasDisliked) {
       return;
     }
 
-    // Optimistic UI update
-    setNetScoreLikes((prevState) => prevState - 1);
-    setHasLiked(false);
-    setHasDisliked(true);
-
     try {
       const response = await postDislikeAnswer(id);
 
-      if (response.status !== 200) {
+      if (response.status === 200) {
+        await fetchNetScore(); // Fetch the updated net score after disliking
+        setHasLiked(false);
+        setHasDisliked(true);
+      } else {
         throw new Error("Failed to dislike the answer");
       }
     } catch (err) {
-      setNetScoreLikes((prevState) => prevState + 1);
-      setHasDisliked(false);
       console.log("Error disliking the answer:", err);
     }
   };
-
   return (
     <div className={styles.main}>
       <p>{answerText}</p>
@@ -324,31 +493,34 @@ const Answer = ({
 
       {isUserLoggedIn && loggedInUserId === userId && (
         <Button
+          isActive={false}
           title="Delete"
-          onClick={() => deleteAnswer()}
+          onClick={deleteAnswer}
           isLoading={false}
           type="DANGER"
         />
       )}
 
       <div className={styles.btnWrapper}>
-        <LikeDislikeButton
-          onClick={handleLike}
-          title="👍"
+        <Button
           isActive={false}
-          type="like"
+          onClick={handleLike}
+          icon={likeBtn.src}
+          type="LIKE"
+          isLoading={false}
         />
 
         <div className={styles.votes}>{netScoreLikes}</div>
 
-        <LikeDislikeButton
-          onClick={handleDislike}
-          title="👎"
+        <Button
           isActive={false}
-          type="dislike"
+          onClick={handleDislike}
+          icon={dislikeBtn.src}
+          type="DISLIKE"
+          isLoading={false}
         />
       </div>
-
+      {/* conditional rendering */}
       <p>{message}</p>
     </div>
   );

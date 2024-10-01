@@ -1,13 +1,11 @@
 import styles from "./styles.module.css";
 import QuestionCard from "../QuestionCard/QuestionCard";
 import { Question } from "../../types/question";
-import Spinner from "../Spinner/Spinner";
+import SpinnerMain from "../SpinnerMain/SpinnerMain";
 
 type QuestionsWrapperProps = {
   questions: Question[];
 };
-
-// TODO: fix the Spinner or create a new one
 
 const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
   return (
@@ -27,7 +25,7 @@ const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
           <h4>No questions available</h4>
         )
       ) : (
-        <Spinner />
+        <SpinnerMain />
       )}
     </div>
   );

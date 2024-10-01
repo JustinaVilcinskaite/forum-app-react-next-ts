@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Button from "../Button/Button";
 import { postQuestion as postQuestionApi } from "../../apiCalls/question";
-import { validateUser as validateUserApi } from "../../apiCalls/user";
+// import { validateUser as validateUserApi } from "../../apiCalls/user";
 
 const QuestionForm = () => {
   const [questionTitle, setQuestionTitle] = useState("");
@@ -17,20 +17,20 @@ const QuestionForm = () => {
   //   later refactor, DRY
   // ar cia palikti funkcija
 
-  const validateUser = async () => {
-    try {
-      const response = await validateUserApi();
+  // const validateUser = async () => {
+  //   try {
+  //     const response = await validateUserApi();
 
-      if (response.status !== 200) {
-        router.push("/login");
-      }
+  //     if (response.status !== 200) {
+  //       router.push("/login");
+  //     }
 
-      //   setUserLoggedIn(true);
-    } catch (err) {
-      router.push("/login");
-      console.log(err);
-    }
-  };
+  //     //   setUserLoggedIn(true);
+  //   } catch (err) {
+  //     router.push("/login");
+  //     console.log(err);
+  //   }
+  // };
 
   const postQuestion = async () => {
     try {
@@ -52,12 +52,12 @@ const QuestionForm = () => {
     }
   };
 
-  useEffect(() => {
-    // if (!jwt) {
-    //     router.push("/login");
-    //   }
-    validateUser();
-  }, []);
+  // useEffect(() => {
+  //   // if (!jwt) {
+  //   //     router.push("/login");
+  //   //   }
+  //   validateUser();
+  // }, []);
 
   return (
     <div className={styles.main}>
@@ -78,7 +78,12 @@ const QuestionForm = () => {
         }}
       />
 
-      <Button isLoading={false} title="Sumbit" onClick={postQuestion} />
+      <Button
+        isLoading={false}
+        isActive={false}
+        title="Sumbit"
+        onClick={postQuestion}
+      />
 
       {/* create a  reusable message component */}
 

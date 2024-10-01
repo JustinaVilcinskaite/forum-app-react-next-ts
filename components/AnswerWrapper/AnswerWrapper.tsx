@@ -34,7 +34,7 @@ const AnswersWrapper = ({
           />
         ))
       ) : (
-        <h4>No answers available</h4>
+        <h4 className={styles.message}>No answers yet</h4>
       )}
     </div>
   );

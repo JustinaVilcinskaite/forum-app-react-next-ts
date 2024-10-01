@@ -62,6 +62,8 @@ const QuestionWithAnswersPage = () => {
   //   router.query.id && fetchQuestionWithAnswers(router.query.id as string);
   // }, [answers]);
 
+  // Spinner?
+
   return (
     <PageTemplate>
       <>
@@ -87,8 +89,9 @@ const QuestionWithAnswersPage = () => {
         />
 
         {/* ??????? */}
+        {/* problema */}
         <AnswerForm
-          questionId={router.query.id as string}
+          // questionId={router.query.id as string}
           isUserLoggedIn={isUserLoggedIn}
           refetchData={() =>
             fetchQuestionWithAnswers(router.query.id as string)

@@ -28,7 +28,10 @@ const QuestionCard = ({
     <Link href={`/question/${id}`} className={styles.main}>
       <h4>{questionTitle}</h4>
       <p>{questionText}</p>
-      <h5>{formattedDate}</h5>
+      <div className={styles.dateWrapper}>
+        <span>asked</span>
+        <h5>{formattedDate}</h5>
+      </div>
     </Link>
   );
 };

@@ -50,7 +50,11 @@ const Question = ({
       <div className={styles.qustionContent}>
         <h4>{questionTitle}</h4>
         <p>{questionText}</p>
-        <h5>{formattedDate}</h5>
+
+        <div className={styles.dateWrapper}>
+          <span>asked</span>
+          <h5>{formattedDate}</h5>
+        </div>
         {/* <h5>{new Date(date).toLocaleDateString()}</h5> */}
       </div>
 
@@ -58,6 +62,7 @@ const Question = ({
         <Button
           title="Delete"
           onClick={deleteQuestion}
+          isActive={false}
           isLoading={false}
           type="DANGER"
         />

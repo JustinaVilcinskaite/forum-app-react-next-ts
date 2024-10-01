@@ -1,8 +1,8 @@
 .main {
   width: 100%;
-  height: 100px;
+  height: 180px;
   border-radius: 0.6rem;
-  padding: 1rem;
+  padding: 1rem 2rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   display: flex;
@@ -12,9 +12,31 @@
   justify-content: center;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+  background-color: #e4ecf7;
+  overflow: hidden;
 }
 
 .main:hover {
-  scale: 1.03;
-  background-color: #f2f2f2;
+  /* scale: 1.03; */
+  background-color: #d2e2fb;
+}
+
+.main p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.main h4 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60%;
+}
+
+.dateWrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }

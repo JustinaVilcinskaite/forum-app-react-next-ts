@@ -1,10 +1,70 @@
 .main {
-  height: 60px;
+  height: 120px;
   padding: 0 2rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 0.6rem;
+  background-color: #e4ecf7;
 }
 
 .logo {
   font-size: 1.4rem;
+}
+
+.burgerBtn {
+  all: unset;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  display: none;
+}
+
+.burgerBtn img {
+  width: 100%;
+}
+
+.overlay {
+  display: none;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .fixedHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    border-radius: 0;
+  }
+  .rightHandSection nav {
+    display: none;
+  }
+
+  .burgerBtn {
+    display: inline-block;
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 110px;
+    right: 0;
+    width: 100%;
+    background-color: #f0f6fd;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: 0.3s ease-in-out;
+  }
+
+  .showOverlay {
+    transform: translateX(0);
+  }
 }

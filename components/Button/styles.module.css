@@ -3,7 +3,8 @@
   padding: 0.9rem 1.5rem;
   background-color: #708bf9;
   border-radius: 5px;
-  width: 150px;
+  width: 120px;
+
   letter-spacing: 0.4px;
   color: #fff;
   align-self: center;
@@ -13,30 +14,63 @@
 }
 
 .main:hover {
-  background-color: #4b6df7;
+  opacity: 0.8;
 }
 
 .danger {
-  background-color: rgb(187, 83, 83);
+  background-color: transparent;
+  border: 1px solid rgb(244, 63, 63);
   align-self: flex-end;
-  width: 80px;
+  width: 70px;
   padding: 0.5rem;
+  color: rgb(244, 63, 63);
+  box-shadow: none;
 }
 
-.danger:hover {
-  background-color: rgb(181, 38, 38);
-}
+/* .danger:hover {
+} */
 
 .signOut {
   background-color: transparent;
   color: black;
   border: 1px solid black;
   width: 110px;
-  transition: 0.3s;
+
+  border-radius: 0;
   box-shadow: none;
 }
 
 .signOut:hover {
   background-color: transparent;
-  border-color: #4b6df7;
+  color: blue;
+}
+
+.likeButton,
+.dislikeButton {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.likeButton {
+  background-color: #e0f7fa;
+  color: blue;
+}
+
+.dislikeButton {
+  background-color: #ffe5e5;
+  color: red;
+}
+
+.active {
+  background-color: #d4edda;
+  color: green;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
 }

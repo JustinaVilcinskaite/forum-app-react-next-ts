@@ -1,0 +1,39 @@
+.main ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.main ul li:first-child a {
+  border: 1px solid black;
+  padding: 0.6rem 1.5rem;
+}
+
+.main ul li:nth-last-child(-n + 2) a {
+  border-radius: 20px;
+  border: 1px solid blue;
+  padding: 0.6rem 1.5rem;
+}
+
+.main ul li a {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.main ul li a:hover {
+  color: blue;
+}
+
+.overlayNavbar ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 5rem;
+}
+
+.overlayNavbar ul li a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+}

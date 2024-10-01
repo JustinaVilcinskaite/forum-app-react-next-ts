@@ -66,6 +66,7 @@ const SignUpForm = () => {
       />
 
       <Button
+        isActive={false}
         onClick={signUpUser}
         title="Sign Up"
         isLoading={isButtonLoading}

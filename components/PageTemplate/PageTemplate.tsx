@@ -1,30 +1,85 @@
 import styles from "./styles.module.css";
 import { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import Link from "next/link";
+import QuestionControlBar from "../QuestionControlBar/QuestionControlBar";
 import { useRouter } from "next/router";
+import { validateUser as validateUserApi } from "../../apiCalls/user";
 
 type PageTemplateProps = {
   children: ReactNode;
+  isProtected?: boolean;
+  onClick?: (filter: string) => void;
 };
 
-const PageTemplate = ({ children }: PageTemplateProps) => {
+const PageTemplate = ({
+  children,
+  isProtected = false,
+  onClick,
+}: PageTemplateProps) => {
+  const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const router = useRouter();
+  // del sitos vietos dar pagalvoti
+  // const hiddenPaths = ["/login", "/signup", "/post-question"];
+  // const displayAskQuestionLink = !hiddenPaths.includes(router.pathname);
 
-  const hiddenPaths = ["/login", "/signup", "/post-question"];
+  // const validateUser = async () => {
+  //   try {
+  //     const response = await validateUserApi();
+  //     if (response.status !== 200 && isProtected) {
+  //       router.push("/login");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     if (isProtected) {
+  //       router.push("/login");
+  //     }
+  //   }
+  // };
 
-  const displayAskQuestionLink = !hiddenPaths.includes(router.pathname);
+  // useEffect(() => {
+  //   if (isProtected) {
+  //     validateUser();
+  //   }
+  // }, [isProtected]);
+
+  const validateUser = async () => {
+    try {
+      const response = await validateUserApi();
+
+      if (response.status === 200) {
+        setUserLoggedIn(true);
+        return;
+      }
+
+      if (isProtected) {
+        router.push("/login");
+      }
+    } catch (err) {
+      console.log(err);
+
+      if (isProtected) {
+        router.push("/login");
+      }
+    }
+  };
+
+  useEffect(() => {
+    validateUser();
+  }, [isProtected]);
 
   return (
     <div className={styles.wrapper}>
-      <Header logo="Forum logo" />
+      <Header logo="Forum logo" isUserLoggedIn={isUserLoggedIn} />
       {/* maybe create a differenet compoenent for links */}
-      {displayAskQuestionLink && (
+      {/* {displayAskQuestionLink && (
         <Link href="/post-question" className={styles.askQuestionLink}>
           Ask Question
         </Link>
-      )}
+      )} */}
+
+      <QuestionControlBar onClick={onClick} />
 
       <div className={styles.main}>{children}</div>
       <Footer copyrightText="&copy; Forum" />

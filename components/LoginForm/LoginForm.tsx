@@ -64,7 +64,12 @@ const LoginForm = () => {
         }}
       />
 
-      <Button onClick={loginUser} title="Login" isLoading={isButtonLoading} />
+      <Button
+        onClick={loginUser}
+        isActive={false}
+        title="Login"
+        isLoading={isButtonLoading}
+      />
 
       <AuthRedirectLink
         text="Do not have an account yet?"
