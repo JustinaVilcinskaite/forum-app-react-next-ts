@@ -3,21 +3,15 @@ import { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import QuestionControlBar from "../QuestionControlBar/QuestionControlBar";
 import { useRouter } from "next/router";
 import { validateUser as validateUserApi } from "../../apiCalls/user";
 
 type PageTemplateProps = {
   children: ReactNode;
   isProtected?: boolean;
-  onClick?: (filter: string) => void;
 };
 
-const PageTemplate = ({
-  children,
-  isProtected = false,
-  onClick,
-}: PageTemplateProps) => {
+const PageTemplate = ({ children, isProtected = false }: PageTemplateProps) => {
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const router = useRouter();
   // del sitos vietos dar pagalvoti
@@ -72,14 +66,6 @@ const PageTemplate = ({
   return (
     <div className={styles.wrapper}>
       <Header logo="Forum logo" isUserLoggedIn={isUserLoggedIn} />
-      {/* maybe create a differenet compoenent for links */}
-      {/* {displayAskQuestionLink && (
-        <Link href="/post-question" className={styles.askQuestionLink}>
-          Ask Question
-        </Link>
-      )} */}
-
-      <QuestionControlBar onClick={onClick} />
 
       <div className={styles.main}>{children}</div>
       <Footer copyrightText="&copy; Forum" />

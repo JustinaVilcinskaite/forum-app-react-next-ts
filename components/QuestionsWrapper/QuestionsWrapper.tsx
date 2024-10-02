@@ -22,7 +22,7 @@ const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
             />
           ))
         ) : (
-          <h4>No questions available</h4>
+          <h4 className={styles.message}>No questions available</h4>
         )
       ) : (
         <SpinnerMain />

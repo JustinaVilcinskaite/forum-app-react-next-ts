@@ -363,6 +363,8 @@
 
 // export default Answer;
 
+// ta gal normali
+
 import styles from "./styles.module.css";
 import likeBtn from "../../assets/like-btn.svg";
 import dislikeBtn from "../../assets/dislike-btn.svg";
@@ -373,6 +375,8 @@ import { deleteAnswer as deleteAnswerApi } from "../../apiCalls/answer";
 import { postLikeAnswer } from "../../apiCalls/answer";
 import { postDislikeAnswer } from "../../apiCalls/answer";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { AxiosError } from "axios";
 
 // pass the Answer object to type Props?
 // nesuprantu like ir dislike funcionavimo, veliau grziti
@@ -386,6 +390,7 @@ type AnswerProps = {
   userId: string;
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
+  // ?
   refetchData: () => void;
 };
 
@@ -404,11 +409,28 @@ const Answer = ({
 
   // ?
   const [netScoreLikes, setNetScoreLikes] = useState(gainedLikesNumber);
-  const [hasLiked, setHasLiked] = useState(false);
-  const [hasDisliked, setHasDisliked] = useState(false);
+  // const [hasLiked, setHasLiked] = useState(false);
+  // const [hasDisliked, setHasDisliked] = useState(false);
+
+  const router = useRouter();
 
   const [message, setMessage] = useState("");
 
+  // const deleteAnswer = async () => {
+  //
+
+  //   try {
+  //     const response = await deleteAnswerApi(id);
+
+  //     if (response.status === 200) {
+  //       refetchData();
+  //     }
+  //   } catch (err) {
+  //     console.log("Error deleting answer:", err);
+  //   }
+  // };
+
+  // pagalvoti dar del sito
   const deleteAnswer = async () => {
     try {
       const response = await deleteAnswerApi(id);
@@ -417,7 +439,17 @@ const Answer = ({
         refetchData();
       }
     } catch (err) {
-      console.log("Error deleting answer", err);
+      const axiosError = err as AxiosError;
+
+      if (axiosError.response?.status === 401) {
+        setMessage("Your session has expired. Please log in again.");
+
+        setTimeout(() => {
+          router.push("/login");
+        }, 3000);
+      } else {
+        console.log("Error deleting answer", err);
+      }
     }
   };
 
@@ -429,13 +461,15 @@ const Answer = ({
 
       if (response.status === 200) {
         setNetScoreLikes(response.data.gainedLikesNumber);
-      } else {
-        throw new Error("Failed to fetch net score");
       }
     } catch (err) {
       console.log("Error fetching net score:", err);
     }
   };
+
+  // useEffect(() => {
+  //   fetchNetScore();
+  // }, [id]); // Dependency on gainedLikesNumber
 
   const handleLike = async () => {
     if (!isUserLoggedIn) {
@@ -443,19 +477,18 @@ const Answer = ({
       return;
     }
 
-    if (hasLiked) {
-      return;
-    }
+    // if (hasLiked) {
+    //   return;
+    // }
 
     try {
       const response = await postLikeAnswer(id);
 
       if (response.status === 200) {
-        await fetchNetScore(); // Fetch the updated net score after liking
-        setHasLiked(true);
-        setHasDisliked(false);
-      } else {
-        throw new Error("Failed to like the answer");
+        await fetchNetScore();
+
+        // setHasLiked(true);
+        // setHasDisliked(false);
       }
     } catch (err) {
       console.log("Error liking the answer:", err);
@@ -468,24 +501,84 @@ const Answer = ({
       return;
     }
 
-    if (hasDisliked) {
-      return;
-    }
+    // if (hasDisliked) {
+    //   return;
+    // }
 
     try {
       const response = await postDislikeAnswer(id);
 
       if (response.status === 200) {
-        await fetchNetScore(); // Fetch the updated net score after disliking
-        setHasLiked(false);
-        setHasDisliked(true);
-      } else {
-        throw new Error("Failed to dislike the answer");
+        await fetchNetScore();
+        // setNetScoreLikes(response.data.gainedLikesNumber);
+        // setHasLiked(false);
+        // setHasDisliked(true);
       }
     } catch (err) {
       console.log("Error disliking the answer:", err);
     }
   };
+
+  // const handleLike = async () => {
+  //   try {
+  //     if (!isUserLoggedIn) {
+  //       setMessage("Log in to interact!");
+  //       return;
+  //     }
+
+  //     if (hasLiked) {
+  //       // If already liked, do nothing
+  //       return;
+  //     }
+
+  //     // Optimistic UI update
+  //     setNetScoreLikes((prevState) => prevState + 1);
+  //     setHasLiked(true);
+  //     setHasDisliked(false); // Reset dislike if switching to like
+
+  //     const response = await postLikeAnswer(id);
+
+  //     // Error handling
+  //     if (response.status !== 200) {
+  //       throw new Error("Failed to like the answer");
+  //     }
+  //   } catch (err) {
+  //     setNetScoreLikes((prevState) => prevState - 1); // Rollback
+  //     setHasLiked(false);
+  //     console.log("Error liking the answer:", err);
+  //   }
+  // };
+
+  // const handleDislike = async () => {
+  //   try {
+  //     if (!isUserLoggedIn) {
+  //       setMessage("Log in to interact!");
+  //       return;
+  //     }
+
+  //     if (hasDisliked) {
+  //       // If already disliked, do nothing
+  //       return;
+  //     }
+
+  //     // Optimistic UI update
+  //     setNetScoreLikes((prevState) => prevState - 1);
+  //     setHasDisliked(true);
+  //     setHasLiked(false); // Reset like if switching to dislike
+
+  //     const response = await postDislikeAnswer(id);
+
+  //     // Error handling
+  //     if (response.status !== 200) {
+  //       throw new Error("Failed to dislike the answer");
+  //     }
+  //   } catch (err) {
+  //     setNetScoreLikes((prevState) => prevState + 1); // Rollback
+  //     setHasDisliked(false);
+  //     console.log("Error disliking the answer:", err);
+  //   }
+  // };
+
   return (
     <div className={styles.main}>
       <p>{answerText}</p>
@@ -500,6 +593,7 @@ const Answer = ({
           type="DANGER"
         />
       )}
+      {/* <p>{message}</p> */}
 
       <div className={styles.btnWrapper}>
         <Button

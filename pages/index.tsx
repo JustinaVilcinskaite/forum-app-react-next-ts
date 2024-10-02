@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 import QuestionsWrapper from "../components/QuestionsWrapper/QuestionsWrapper";
+import QuestionControlBar from "../components/QuestionControlBar/QuestionControlBar";
 
 import { Question } from "../types/question";
 import { fetchQuestions as fetchQuestionsApi } from "../apiCalls/question";
@@ -27,19 +28,21 @@ const MainPage = () => {
   useEffect(() => {
     fetchQuestions();
   }, []);
-  const handleFilterChange = (filter: string) => {
-    setFilter(filter as "all" | "answered" | "unanswered");
+
+  const getFilteredQuestions = () => {
+    if (filter === "answered") return questions.filter((q) => q.isAnswered);
+    if (filter === "unanswered") return questions.filter((q) => !q.isAnswered);
+    return questions;
   };
 
-  const filteredQuestions = questions.filter((question) => {
-    if (filter === "all") return true;
-    if (filter === "answered") return question.isAnswered;
-    if (filter === "unanswered") return !question.isAnswered;
-  });
-
   return (
-    <PageTemplate onClick={handleFilterChange}>
-      <QuestionsWrapper questions={filteredQuestions} />
+    <PageTemplate>
+      <QuestionControlBar
+        filterAll={() => setFilter("all")}
+        filterAnswered={() => setFilter("answered")}
+        filterUnanswered={() => setFilter("unanswered")}
+      />
+      <QuestionsWrapper questions={getFilteredQuestions()} />
     </PageTemplate>
   );
 };

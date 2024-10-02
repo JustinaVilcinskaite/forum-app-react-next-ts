@@ -13,29 +13,27 @@ const Navbar = ({ onClick, isUserLoggedIn, isInOverlay }: NavbarProps) => {
   const router = useRouter();
 
   const hiddenPaths = ["/login", "/signup"];
-  const shouldHideAuthLinks = hiddenPaths.includes(router.pathname);
+  const shouldHideLinks = hiddenPaths.includes(router.pathname);
 
   return (
     <nav className={`${styles.main} ${isInOverlay && styles.overlayNavbar}`}>
       <ul>
-        <li>
-          <Link href="/">Questions</Link>
-        </li>
-        {isUserLoggedIn ? (
+        {!shouldHideLinks && (
           <>
             <li>
-              <Button
-                isActive={false}
-                title="Sign out"
-                onClick={onClick}
-                isLoading={false}
-                type="SIGNOUT"
-              />
+              <Link href="/">Questions</Link>
             </li>
-          </>
-        ) : (
-          <>
-            {!shouldHideAuthLinks && (
+            {isUserLoggedIn ? (
+              <li>
+                <Button
+                  isActive={false}
+                  title="Log out"
+                  onClick={onClick}
+                  isLoading={false}
+                  type="SIGNOUT"
+                />
+              </li>
+            ) : (
               <>
                 <li>
                   <Link href="/login">Log in</Link>

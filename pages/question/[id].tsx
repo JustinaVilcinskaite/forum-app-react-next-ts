@@ -8,6 +8,7 @@ import { fetchQuestionWithAnswers as fetchQuestionWithAnswersApi } from "../../a
 import AnswersWrapper from "../../components/AnswerWrapper/AnswerWrapper";
 import AnswerForm from "../../components/AnswerForm/AnswerForm";
 import { validateUser as validateUserApi } from "../../apiCalls/user";
+import QuestionControlBar from "../../components/QuestionControlBar/QuestionControlBar";
 
 const QuestionWithAnswersPage = () => {
   //?
@@ -67,6 +68,7 @@ const QuestionWithAnswersPage = () => {
   return (
     <PageTemplate>
       <>
+        <QuestionControlBar />
         {question && (
           <QuestionFullView
             id={question.id}
