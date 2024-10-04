@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 import QuestionsWrapper from "../components/QuestionsWrapper/QuestionsWrapper";
-import QuestionControlBar from "../components/QuestionControlBar/QuestionControlBar";
-
 import { Question } from "../types/question";
 import { fetchQuestions as fetchQuestionsApi } from "../apiCalls/question";
+import QuestionNavBar from "../components/QuestionNavBar/QuestionNavBar";
+import QuestionFilterBar from "../components/QuestionFilterBar/QuestionFilterBar";
+import styles from "../styles/Home.module.css";
 
 const MainPage = () => {
   //
@@ -17,8 +18,6 @@ const MainPage = () => {
     try {
       const response = await fetchQuestionsApi();
 
-      // istrinti console
-      console.log(response.data.questions);
       setQuestions(response.data.questions);
     } catch (err) {
       console.log(err);
@@ -37,11 +36,23 @@ const MainPage = () => {
 
   return (
     <PageTemplate>
+      <div className={styles.controlBarWrapper}>
+        <QuestionFilterBar
+          filterAll={() => setFilter("all")}
+          filterAnswered={() => setFilter("answered")}
+          filterUnanswered={() => setFilter("unanswered")}
+        />
+        <QuestionNavBar />
+      </div>
+
+      {/* 
       <QuestionControlBar
         filterAll={() => setFilter("all")}
         filterAnswered={() => setFilter("answered")}
         filterUnanswered={() => setFilter("unanswered")}
-      />
+      /> */}
+
+      {/* ???????? */}
       <QuestionsWrapper questions={getFilteredQuestions()} />
     </PageTemplate>
   );

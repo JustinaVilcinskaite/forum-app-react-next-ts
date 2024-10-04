@@ -4,18 +4,16 @@ import { Question } from "../../types/question";
 import { Answer } from "../../types/answer";
 import PageTemplate from "../../components/PageTemplate/PageTemplate";
 import QuestionFullView from "../../components/QuestionFullView/QuestionFullView";
-import { fetchQuestionWithAnswers as fetchQuestionWithAnswersApi } from "../../apiCalls/answer";
 import AnswersWrapper from "../../components/AnswerWrapper/AnswerWrapper";
 import AnswerForm from "../../components/AnswerForm/AnswerForm";
+import { fetchQuestionWithAnswers as fetchQuestionWithAnswersApi } from "../../apiCalls/answer";
 import { validateUser as validateUserApi } from "../../apiCalls/user";
-import QuestionControlBar from "../../components/QuestionControlBar/QuestionControlBar";
+import QuestionNavBar from "../../components/QuestionNavBar/QuestionNavBar";
 
 const QuestionWithAnswersPage = () => {
-  //?
+  //
   const [question, setQuestion] = useState<Question | null>(null);
-  // const [answers, setAnswers] = useState([]);
   const [answers, setAnswers] = useState<Answer[]>([]);
-
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
 
@@ -32,7 +30,6 @@ const QuestionWithAnswersPage = () => {
     }
   };
 
-  // ar nepertekline validacija like/dislike ir postAnswer setLoggedInUserId(response.data.userId);
   const validateUser = async () => {
     try {
       const response = await validateUserApi();
@@ -53,27 +50,18 @@ const QuestionWithAnswersPage = () => {
     }
   }, [router.query.id]);
 
-  // useEffect(() => {
-  //   router.query.id && fetchQuestionWithAnswers(router.query.id as string);
-  //   validateUser();
-  // }, [router.query.id]);
-
-  // infinite loop??
-  // useEffect(() => {
-  //   router.query.id && fetchQuestionWithAnswers(router.query.id as string);
-  // }, [answers]);
-
-  // Spinner?
+  //TODO: Spinner
 
   return (
     <PageTemplate>
       <>
-        <QuestionControlBar />
+        <QuestionNavBar />
         {question && (
           <QuestionFullView
             id={question.id}
             questionTitle={question.questionTitle}
             questionText={question.questionText}
+            userName={question.userName}
             date={question.date}
             // why userId
             userId={question.userId}
@@ -90,8 +78,7 @@ const QuestionWithAnswersPage = () => {
           }
         />
 
-        {/* ??????? */}
-        {/* problema */}
+        {/* problema??? */}
         <AnswerForm
           // questionId={router.query.id as string}
           isUserLoggedIn={isUserLoggedIn}

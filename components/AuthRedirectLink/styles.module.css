@@ -5,7 +5,7 @@
 }
 
 .linkText {
-  color: blue;
+  color: var(--secondary-color);
   transition: color 0.3s ease;
 }
 

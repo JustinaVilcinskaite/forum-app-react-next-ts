@@ -17,6 +17,7 @@ const AnswersWrapper = ({
 }: AnswersWrapperProps) => {
   return (
     <div className={styles.main}>
+      {/* <h2>Answers</h2> */}
       {answers.length ? (
         answers.map((answer) => (
           <Answer
@@ -30,6 +31,7 @@ const AnswersWrapper = ({
             userId={answer.userId}
             loggedInUserId={loggedInUserId}
             isUserLoggedIn={isUserLoggedIn}
+            userName={answer.userName}
             refetchData={refetchData}
           />
         ))

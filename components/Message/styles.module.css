@@ -1,0 +1,12 @@
+.error {
+  color: #eb5757;
+
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.success {
+  color: #31c2a0;
+  text-align: center;
+  margin-top: 1rem;
+}

@@ -5,13 +5,15 @@ import cookie from "js-cookie";
 import { useRouter } from "next/router";
 import Navbar from "../NavBar/NavBar";
 import burgerBtn from "../../assets/burger-btn.svg";
+import { ReactNode } from "react";
 
 type HeaderProps = {
-  logo: string;
+  websiteTitle: string;
   isUserLoggedIn: boolean;
+  icon: ReactNode;
 };
 
-const Header = ({ logo, isUserLoggedIn }: HeaderProps) => {
+const Header = ({ websiteTitle, isUserLoggedIn, icon }: HeaderProps) => {
   const [isShowOverlay, setShowOverlay] = useState(false);
   const router = useRouter();
 
@@ -26,9 +28,10 @@ const Header = ({ logo, isUserLoggedIn }: HeaderProps) => {
         <header
           className={`${styles.main} ${isShowOverlay && styles.fixedHeader}`}
         >
-          <Link href="/" className={styles.logo}>
-            {logo}
-          </Link>
+          <div className={styles.logoTitleWrapper}>
+            <img src={icon} alt="icon" className={styles.icon} />
+            <Link href="/">{websiteTitle}</Link>
+          </div>
 
           <div className={styles.rightHandSection}>
             <Navbar

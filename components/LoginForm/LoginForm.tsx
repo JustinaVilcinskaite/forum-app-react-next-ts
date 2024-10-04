@@ -5,31 +5,35 @@ import cookie from "js-cookie";
 import { login } from "../../apiCalls/user";
 import Button from "../Button/Button";
 import AuthRedirectLink from "../AuthRedirectLink/AuthRedirectLink";
-
-// TODO: ux validation
-// TODO: rethink the succes and error
+import { validateLogin } from "../../dataValidations/loginValidation";
+import Message from "../Message/Message";
 
 const LoginForm = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isButtonLoading, setButtonLoading] = useState(false);
-
-  const [isShowError, setShowError] = useState(false);
-  const [isShowSuccess, setShowSuccess] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isError, setError] = useState(false);
 
   const loginUser = async () => {
+    const validationMessage = validateLogin({ email, password });
+    if (validationMessage) {
+      setMessage(validationMessage);
+      setError(true);
+      return;
+    }
+
     try {
       setButtonLoading(true);
 
       const response = await login({ email, password });
 
-      //  TODO: fix this
       if (response.status === 200) {
         cookie.set(process.env.JWT_KEY as string, response.data.token);
+        setError(false);
+        setMessage("Login successful! Redirecting...");
 
-        setShowSuccess(true);
-        setShowError(false);
         setTimeout(() => {
           router.push("/");
         }, 1000);
@@ -38,51 +42,49 @@ const LoginForm = () => {
       }
     } catch (err) {
       console.error("Login Error", err);
-      setShowError(true);
+      setError(true);
+      setMessage("Bad email or password");
       setButtonLoading(false);
     }
   };
-  //   better html structure
+
   return (
     <div className={styles.main}>
-      <h1>Login to Forum</h1>
+      <div className={styles.form}>
+        <h1>Login</h1>
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-      />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
 
-      <Button
-        onClick={loginUser}
-        isActive={false}
-        title="Login"
-        isLoading={isButtonLoading}
-      />
+        <Button
+          onClick={loginUser}
+          isActive={false}
+          title="Login"
+          isLoading={isButtonLoading}
+        />
 
-      <AuthRedirectLink
-        text="Do not have an account yet?"
-        linkText="Create an account"
-        href="/signup"
-      />
+        <AuthRedirectLink
+          text="Do not have an account yet?"
+          linkText="Create an account"
+          href="/signup"
+        />
 
-      {/* create a  reusable message component */}
-
-      {isShowError && <h5 className={styles.error}>Bad email or password</h5>}
-      {isShowSuccess && (
-        <h5 className={styles.success}>Login successful! Redirecting...</h5>
-      )}
+        {message && <Message text={message} isError={isError} />}
+      </div>
     </div>
   );
 };

@@ -1,15 +1,10 @@
 import axios from "axios";
 import { getAuthHeaders } from "../utils/authHeaders";
 
-// ?
 type PostQuestionProps = {
   questionTitle: string;
   questionText: string;
 };
-// ?
-// type SumbitQuestionProps = {
-//   question: Question;
-// };
 
 export const postQuestion = async ({
   questionTitle,

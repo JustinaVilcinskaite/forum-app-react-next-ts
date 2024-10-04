@@ -5,43 +5,24 @@ import { ReactNode } from "react";
 type ButtonProps = {
   onClick: () => void;
   title?: string;
-  isLoading: boolean;
-  isActive: boolean;
+  isLoading?: boolean;
   type?: string;
   icon?: ReactNode;
 };
 
-const Button = ({
-  onClick,
-  title,
-  isLoading,
-  type,
-  isActive,
-  icon,
-}: ButtonProps) => {
+const Button = ({ onClick, title, isLoading, type, icon }: ButtonProps) => {
   return (
-    //   <button
-    //     className={`${styles.main} ${type === "DANGER" && styles.danger}  ${
-    //       type === "SIGNOUT" && styles.signOut
-    //     }`}
-    //     onClick={onClick}
-    //   >
-    //     {isLoading ? <SpinnerBtn /> : <>{title}</>}
-    //   </button>
-    // );
+    // gal reiks pasikeisti like dislike
 
     <button
       className={`
       ${styles.main} 
       ${type === "DANGER" && styles.danger} 
-      ${type === "SIGNOUT" && styles.signOut}
-      ${type === "FILTER" && styles.signOut}
-      ${type === "LIKE" && (isActive ? styles.active : styles.likeButton)} 
-      ${type === "DISLIKE" && (isActive ? styles.active : styles.dislikeButton)}
-      
-    `}
+      ${type === "FILTER" && styles.filter}
+      ${type === "LOGOUT" && styles.logout}
+      ${type === "LIKE" && styles.likeButton} 
+      ${type === "DISLIKE" && styles.dislikeButton}`}
       onClick={onClick}
-      disabled={isActive && (type === "LIKE" || type === "DISLIKE")}
     >
       {isLoading ? (
         <SpinnerBtn />

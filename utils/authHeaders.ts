@@ -6,13 +6,3 @@ export const getAuthHeaders = () => {
     Authorization: jwt,
   };
 };
-
-// export const getAuthHeaders = () => {
-//   const jwt = cookie.get(process.env.JWT_KEY as string);
-//   if (!jwt) {
-//     return;
-//   }
-//   return {
-//     authorization: jwt,
-//   };
-// };

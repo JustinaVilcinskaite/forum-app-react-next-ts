@@ -4,24 +4,26 @@
   list-style: none;
 }
 
-.main ul li:first-child a {
+.main ul li:first-child {
   border: 1px solid black;
+  border: 1px solid var(--secondary-color);
   padding: 0.6rem 1.5rem;
 }
 
-.main ul li:nth-last-child(-n + 2) a {
+.circleBtn {
   border-radius: 20px;
-  border: 1px solid blue;
-  padding: 0.6rem 1.5rem;
+  border: 1px solid black;
+  padding: 0.7rem 1.5rem;
 }
 
 .main ul li a {
+  font-size: 0.9rem;
   transition: 0.3s;
   cursor: pointer;
 }
 
 .main ul li a:hover {
-  color: blue;
+  color: var(--secondary-color);
 }
 
 .overlayNavbar ul {
@@ -36,4 +38,10 @@
   text-decoration: none;
   font-size: 1.2rem;
   letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .main ul li a {
+    font-size: 0.85rem;
+  }
 }

@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { useRouter } from "next/router";
 import { validateUser as validateUserApi } from "../../apiCalls/user";
+import forumLogo from "../../assets/forum-logo.svg";
 
 type PageTemplateProps = {
   children: ReactNode;
@@ -65,7 +66,16 @@ const PageTemplate = ({ children, isProtected = false }: PageTemplateProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <Header logo="Forum logo" isUserLoggedIn={isUserLoggedIn} />
+      <Header
+        websiteTitle="Forum"
+        icon={forumLogo.src}
+        isUserLoggedIn={isUserLoggedIn}
+      />
+
+      {/* <div className={styles.bar}>
+        <Bar1 />
+        <Bar2 />
+      </div> */}
 
       <div className={styles.main}>{children}</div>
       <Footer copyrightText="&copy; Forum" />

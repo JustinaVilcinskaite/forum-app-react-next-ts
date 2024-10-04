@@ -1,7 +1,31 @@
 import axios from "axios";
 import { getAuthHeaders } from "../utils/authHeaders";
 
-// gal kitur perkelti
+type PostAnswerProps = {
+  answerText: string;
+  questionId: string;
+};
+
+export const postAnswer = async ({
+  answerText,
+  questionId,
+}: PostAnswerProps) => {
+  const body = {
+    answerText,
+  };
+
+  const headers = getAuthHeaders();
+
+  const response = await axios.post(
+    `${process.env.SERVER_URL}/questions/${questionId}/answers`,
+    body,
+    { headers }
+  );
+
+  return response;
+};
+
+// gal prie klausimu perkelti
 export const fetchQuestionWithAnswers = async (id: string) => {
   const response = await axios.get(
     `${process.env.SERVER_URL}/questions/${id}/answers`
@@ -45,29 +69,9 @@ export const postDislikeAnswer = async (id: string) => {
   return response;
 };
 
-type PostAnswerProps = {
-  answerText: string;
-  questionId: string;
-};
-// ?
-// type SumbitQuestionProps = {
-//   question: Question;
-// };
-
-export const postAnswer = async ({
-  answerText,
-  questionId,
-}: PostAnswerProps) => {
-  const body = {
-    answerText,
-  };
-
-  const headers = getAuthHeaders();
-
-  const response = await axios.post(
-    `${process.env.SERVER_URL}/questions/${questionId}/answers`,
-    body,
-    { headers }
+export const fetchNetScore = async (id: string) => {
+  const response = await axios.get(
+    `${process.env.SERVER_URL}/answers/${id}/net-score`
   );
 
   return response;

@@ -19,10 +19,14 @@ const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
               questionTitle={question.questionTitle}
               questionText={question.questionText}
               date={question.date}
+              userName={question.userName}
             />
           ))
         ) : (
-          <h4 className={styles.message}>No questions available</h4>
+          <div className={styles.message}>
+            <h4>No questions yet...</h4>
+          </div>
+          // <h4 className={styles.message}>No questions available</h4>
         )
       ) : (
         <SpinnerMain />

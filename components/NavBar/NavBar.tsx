@@ -18,28 +18,28 @@ const Navbar = ({ onClick, isUserLoggedIn, isInOverlay }: NavbarProps) => {
   return (
     <nav className={`${styles.main} ${isInOverlay && styles.overlayNavbar}`}>
       <ul>
-        {!shouldHideLinks && (
+        <li>
+          <Link href="/">Questions</Link>
+        </li>
+        {isUserLoggedIn ? (
           <>
             <li>
-              <Link href="/">Questions</Link>
+              <Button title="Log out" onClick={onClick} type="LOGOUT" />
             </li>
-            {isUserLoggedIn ? (
-              <li>
-                <Button
-                  isActive={false}
-                  title="Log out"
-                  onClick={onClick}
-                  isLoading={false}
-                  type="SIGNOUT"
-                />
-              </li>
-            ) : (
+          </>
+        ) : (
+          <>
+            {!shouldHideLinks && (
               <>
                 <li>
-                  <Link href="/login">Log in</Link>
+                  <Link href="/login" className={styles.circleBtn}>
+                    Log in
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/signup">Sign up</Link>
+                  <Link href="/signup" className={styles.circleBtn}>
+                    Sign up
+                  </Link>
                 </li>
               </>
             )}

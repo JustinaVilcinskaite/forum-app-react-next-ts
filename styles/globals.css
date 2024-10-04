@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #fff;
+  --secondary-color: #2e37fe;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +10,9 @@
 }
 
 body {
-  background-color: #a4a4a4;
+  min-width: 400px;
+  /* max-width: 1400px;
+  margin: 0 auto; */
 }
 
 a {

@@ -4,10 +4,14 @@ import { useRouter } from "next/router";
 import Button from "../Button/Button";
 import { postQuestion as postQuestionApi } from "../../apiCalls/question";
 // import { validateUser as validateUserApi } from "../../apiCalls/user";
+import { validateQuestion } from "../../dataValidations/questionValidation";
+import Message from "../Message/Message";
 
 const QuestionForm = () => {
   const [questionTitle, setQuestionTitle] = useState("");
   const [questionText, setQuestionText] = useState("");
+  const [message, setMessage] = useState("");
+  const [isError, setError] = useState(false);
 
   //   const [isShowError, setShowError] = useState(false);
   //   const [isShowSuccess, setShowSuccess] = useState(false);
@@ -33,6 +37,13 @@ const QuestionForm = () => {
   // };
 
   const postQuestion = async () => {
+    const validationMessage = validateQuestion({ questionTitle, questionText });
+    if (validationMessage) {
+      setMessage(validationMessage);
+      setError(true); // Set success to false if validation fails
+      return;
+    }
+
     try {
       const response = await postQuestionApi({
         questionTitle,
@@ -40,15 +51,17 @@ const QuestionForm = () => {
       });
       //   TODO:fix this
       if (response.status === 201) {
-        // setShowSuccess(true);
-        // setShowError(false);
+        setError(false);
+        setMessage("Question posted successfully!");
+
         setTimeout(() => {
           router.push("/");
         }, 2000);
       }
     } catch (err) {
       console.log(err);
-      //   setShowError(true);
+      setMessage("Error posting question.");
+      setError(true);
     }
   };
 
@@ -61,42 +74,33 @@ const QuestionForm = () => {
 
   return (
     <div className={styles.main}>
-      <h1>Ask your Question</h1>
-      <input
-        value={questionTitle}
-        placeholder="Question Title"
-        type="text"
-        onChange={(e) => {
-          setQuestionTitle(e.target.value);
-        }}
-      />
-      <textarea
-        value={questionText}
-        placeholder="Write your question..."
-        onChange={(e) => {
-          setQuestionText(e.target.value);
-        }}
-      />
+      <div className={styles.form}>
+        <h1>Ask your Question</h1>
+        <input
+          value={questionTitle}
+          placeholder="Question Title"
+          type="text"
+          onChange={(e) => {
+            setQuestionTitle(e.target.value);
+          }}
+        />
+        <textarea
+          value={questionText}
+          placeholder="Write your question..."
+          onChange={(e) => {
+            setQuestionText(e.target.value);
+          }}
+        />
 
-      <Button
-        isLoading={false}
-        isActive={false}
-        title="Sumbit"
-        onClick={postQuestion}
-      />
+        <Button
+          isLoading={false}
+          isActive={false}
+          title="Sumbit"
+          onClick={postQuestion}
+        />
 
-      {/* create a  reusable message component */}
-
-      {/* {isShowError && (
-        <h5 className={styles.error}>
-          All fields are required. Please fill out the form.
-        </h5>
-      )}
-      {isShowSuccess && (
-        <h5 className={styles.success}>
-          Work added to Portfolio successfully! Redirecting...
-        </h5>
-      )} */}
+        {message && <Message text={message} isError={isError} />}
+      </div>
     </div>
   );
 };
