@@ -1,11 +1,11 @@
 .error {
-  color: hsl(0, 79%, 63%);
+  color: var(--danger-color);
   text-align: center;
   margin-top: 0.5rem;
 }
 
 .success {
-  color: #31c2a0;
+  color: var(--success-color);
   text-align: center;
   margin-top: 0.5rem;
 }

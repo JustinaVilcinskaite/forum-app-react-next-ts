@@ -19,7 +19,7 @@ const Navbar = ({ onClick, isUserLoggedIn, isInOverlay }: NavbarProps) => {
     <nav className={`${styles.main} ${isInOverlay && styles.overlayNavbar}`}>
       <ul>
         <li>
-          <Link href="/">Questions</Link>
+          <Link href="/questions">Questions</Link>
         </li>
         {isUserLoggedIn ? (
           <>

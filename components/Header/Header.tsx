@@ -36,7 +36,7 @@ const Header = ({ websiteTitle, isUserLoggedIn, icon }: HeaderProps) => {
 
   return (
     <>
-      <div className={`${isShowOverlay && "no-scroll"}`}>
+      <div className={`${isShowOverlay && "noScroll"}`}>
         <header
           className={`${styles.main} ${isShowOverlay && styles.fixedHeader}`}
         >

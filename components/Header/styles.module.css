@@ -6,20 +6,6 @@
   align-items: center;
   width: 100%;
   border-radius: 0.6rem;
-
-  background-color: var(--primary-color);
-
-  /* background-color: rgb(218, 235, 247); */
-  /* background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%); */
-
-  /* background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%); */
-  /* background-image: linear-gradient(
-    to top,
-    #f3e7e9 0%,
-    #e3eeff 99%,
-    #e3eeff 100%
-  ); */
-
   background-image: linear-gradient(
     to top,
     #f3e7e9 0%,
@@ -57,7 +43,7 @@
   display: none;
 }
 
-.no-scroll {
+.noScroll {
   overflow: hidden;
 }
 
@@ -98,5 +84,13 @@
 
   .showOverlay {
     transform: translateX(0);
+  }
+
+  .logoTitleWrapper a {
+    font-size: 2rem;
+  }
+
+  .logo {
+    width: 4.5rem;
   }
 }

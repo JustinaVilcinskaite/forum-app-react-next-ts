@@ -14,7 +14,8 @@
 }
 
 .danger {
-  border-color: rgb(239, 93, 93);
+  /* border-color: rgb(239, 93, 93); */
+  border-color: var(--danger-color);
   border-radius: 1rem;
   color: rgb(48, 47, 47);
   align-self: flex-end;
@@ -23,8 +24,8 @@
 }
 
 .danger:hover {
-  color: rgb(239, 93, 93);
-  border-color: rgb(239, 93, 93);
+  color: var(--danger-color);
+  border-color: var(--danger-color);
 }
 
 .neutral {
