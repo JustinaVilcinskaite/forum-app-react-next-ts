@@ -17,7 +17,7 @@ const AnswersWrapper = ({
 }: AnswersWrapperProps) => {
   return (
     <div className={styles.main}>
-      {/* <h2>Answers</h2> */}
+      <h3>Answers</h3>
       {answers.length ? (
         answers.map((answer) => (
           <Answer

@@ -5,10 +5,10 @@ type ModalProps = {
   text: string;
   onConfirm: () => void;
   onCancel: () => void;
-  isDeleted: boolean;
+  isActionComplete: boolean;
 };
 
-const Modal = ({ text, onConfirm, onCancel, isDeleted }: ModalProps) => {
+const Modal = ({ text, onConfirm, onCancel, isActionComplete }: ModalProps) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.main}>
@@ -18,22 +18,11 @@ const Modal = ({ text, onConfirm, onCancel, isDeleted }: ModalProps) => {
 
         <div className={styles.modalContentWrapper}>
           <h3>{text}</h3>
-          {!isDeleted && (
+          {!isActionComplete && (
             <div className={styles.modalButtons}>
-              <Button
-                isActive={false}
-                title="Yes"
-                onClick={onConfirm}
-                isLoading={false}
-                type="DANGER"
-              />
+              <Button title="Yes" onClick={onConfirm} type="DANGER" />
 
-              <Button
-                title="Cancel"
-                onClick={onCancel}
-                isLoading={false}
-                isActive={false}
-              />
+              <Button title="Cancel" onClick={onCancel} type="NEUTRAL" />
             </div>
           )}
         </div>

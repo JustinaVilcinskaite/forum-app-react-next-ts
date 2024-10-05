@@ -1,12 +1,11 @@
 .main {
-  width: 100%;
+  /* width: 100%;
   height: calc(100vh - 120px - 60px);
   background-color: var(--primary-color);
   border-radius: 0.6rem;
+  margin-top: 0.3rem; */
 
-  margin-top: 0.3rem;
-
-  /* margin-top: 5rem; */
+  margin-top: 3rem;
 }
 
 .form {

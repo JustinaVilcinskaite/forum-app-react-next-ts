@@ -20,8 +20,9 @@ const Button = ({ onClick, title, isLoading, type, icon }: ButtonProps) => {
       ${type === "DANGER" && styles.danger} 
       ${type === "FILTER" && styles.filter}
       ${type === "LOGOUT" && styles.logout}
-      ${type === "LIKE" && styles.likeButton} 
-      ${type === "DISLIKE" && styles.dislikeButton}`}
+      ${type === "VOTE" && styles.likeDislikeBtn} 
+      ${type === "NEUTRAL" && styles.neutral} 
+    `}
       onClick={onClick}
     >
       {isLoading ? (

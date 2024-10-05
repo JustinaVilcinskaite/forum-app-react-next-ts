@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Button from "../Button/Button";
 import { deleteQuestion as deleteQuestionApi } from "../../apiCalls/question";
+import { formatDate } from "../../utils/dateFormatter";
 import Modal from "../Modal/Modal";
 
-// TODO: add a MODAL
 // pass the Question object to type Props?
 
 type QuestionProps = {
@@ -31,21 +31,16 @@ const Question = ({
   loggedInUserId,
   isUserLoggedIn,
 }: QuestionProps) => {
-  const dateObj = new Date(date);
-
-  const formattedDate = dateObj.toLocaleDateString();
-
   const router = useRouter();
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
-  const [message, setMessage] = useState("");
+  const [isActionComplete, setActionComplete] = useState(false);
 
   const deleteQuestion = async (id: string) => {
     try {
       const response = await deleteQuestionApi(id);
 
       if (response.status === 200) {
-        setIsDeleted(true);
+        setActionComplete(true);
 
         setTimeout(() => {
           setModalOpen(false);
@@ -53,7 +48,7 @@ const Question = ({
         }, 2000);
       }
     } catch (err) {
-      console.log("Error during question deletion:", err);
+      console.log("Error deleting question", err);
     }
   };
 
@@ -66,7 +61,7 @@ const Question = ({
         </div>
         <div className={styles.userDateWrapper}>
           <h5>{userName}</h5>
-          <h5>{formattedDate}</h5>
+          <h5>{formatDate(date)}</h5>
         </div>
       </div>
 
@@ -84,15 +79,17 @@ const Question = ({
       {isModalOpen && (
         <Modal
           text={
-            isDeleted
+            isActionComplete
               ? "The question has been successfully deleted."
               : "Are you sure you want to delete your question?"
           }
           onConfirm={
-            !isDeleted ? () => deleteQuestion(id) : () => setModalOpen(false)
+            !isActionComplete
+              ? () => deleteQuestion(id)
+              : () => setModalOpen(false)
           }
           onCancel={() => setModalOpen(false)}
-          isDeleted={isDeleted}
+          isActionComplete={isActionComplete}
         />
       )}
     </div>

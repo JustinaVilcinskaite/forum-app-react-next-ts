@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { formatDate } from "../../utils/dateFormatter";
 // import { Question } from "../../types/question";
 
 // pass the Question object to QuestionCardProps?
@@ -22,15 +23,15 @@ const QuestionCard = ({
   userName,
 }: QuestionCardProps) => {
   // date
-  const dateObj = new Date(date);
+  // const dateObj = new Date(date);
 
-  const formattedDate = dateObj.toLocaleDateString();
+  // const formattedDate = dateObj.toLocaleDateString();
 
   return (
     <Link href={`/question/${id}`} className={styles.main}>
       <div className={styles.userDateWrapper}>
         <h5>{userName}</h5>
-        <h5>{formattedDate}</h5>
+        <h5>{formatDate(date)}</h5>
       </div>
 
       <div className={styles.questionContent}>

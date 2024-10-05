@@ -21,7 +21,8 @@ const AnswerForm = ({ isUserLoggedIn, refetchData }: AnswerFormProps) => {
 
   const postAnswer = async () => {
     if (!isUserLoggedIn) {
-      setMessage("You must be logged in to answer.");
+      setMessage("You must be logged in to answer questions.");
+      setError(true);
       return;
     }
 
@@ -48,89 +49,29 @@ const AnswerForm = ({ isUserLoggedIn, refetchData }: AnswerFormProps) => {
           refetchData();
         }, 1000);
       }
-
-      // ????
     } catch (err) {
-      console.log("Error posting answer:", err);
+      console.log("Error posting answer", err);
       setMessage("Error posting answer.");
       setError(true);
     }
   };
 
-  // return (
-  //   <>
-  //     {isUserLoggedIn ? (
-  //       <div className={styles.main}>
-  //         <h1>Your answer</h1>
-  //         <textarea
-  //           value={answerText}
-  //           onChange={(e) => setAnswerText(e.target.value)}
-  //           placeholder="Write your answer..."
-  //         />
-  //         <Button isLoading={false} title="Submit" onClick={postAnswer} />
-  //         {message && <h4>{message}</h4>}
-  //       </div>
-  //     ) : (
-  //       <div className={styles.}>
-  //         <h4>You must be logged in to answer questions.</h4>
-  //       </div>
-  //     )}
-  //   </>
-  // );
-
   return (
     <div className={styles.main}>
-      {isUserLoggedIn ? (
-        <div className={styles.answerForm}>
-          <h1>Your answer</h1>
-          <textarea
-            value={answerText}
-            onChange={(e) => setAnswerText(e.target.value)}
-            placeholder="Write your answer..."
-          />
+      <div className={styles.answerForm}>
+        <h1>Your Answer</h1>
+        <textarea
+          value={answerText}
+          onChange={(e) => setAnswerText(e.target.value)}
+          placeholder="Write your answer..."
+        />
 
-          <Button
-            isLoading={false}
-            isActive={false}
-            title="Sumbit"
-            onClick={postAnswer}
-          />
+        <Button title="Sumbit" onClick={postAnswer} />
 
-          {/* {message && (
-            <h5 className={isError ? styles.error : styles.success}>
-              {message}
-            </h5>
-          )} */}
-
-          {message && <Message text={message} isError={isError} />}
-        </div>
-      ) : (
-        <h4>You must be logged in to answer questions.</h4>
-      )}
+        {message && <Message text={message} isError={isError} />}
+      </div>
     </div>
   );
 };
 
 export default AnswerForm;
-
-{
-  /* <div className={styles.main}>
-<h1>Ask your Question</h1>
-<input
-  value={questionTitle}
-  placeholder="Question Title"
-  type="text"
-  onChange={(e) => {
-    setQuestionTitle(e.target.value);
-  }}
-/>
-<textarea
-  value={questionText}
-  placeholder="Write your question..."
-  onChange={(e) => {
-    setQuestionText(e.target.value);
-  }}
-/>
-
-<Button isLoading={false} title="Sumbit" onClick={postQuestion} /> */
-}

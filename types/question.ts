@@ -7,4 +7,3 @@ export type Question = {
   isAnswered: boolean;
   userName: string;
 };
-// date

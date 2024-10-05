@@ -12,24 +12,20 @@
 }
 
 .reactionBtnWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   left: 2rem;
   top: 50%;
   transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   gap: 0.3rem;
 }
 
 .error {
-  margin-top: 1rem;
+  font-size: 0.9rem;
   color: rgb(243, 85, 85);
-  font-size: 0.85rem;
-  position: absolute;
-  bottom: 1.7rem;
-  left: 2rem;
 }
 
 .answerContent {

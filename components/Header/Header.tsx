@@ -5,6 +5,8 @@ import cookie from "js-cookie";
 import { useRouter } from "next/router";
 import Navbar from "../NavBar/NavBar";
 import burgerBtn from "../../assets/burger-btn.svg";
+import Modal from "../Modal/Modal";
+
 import { ReactNode } from "react";
 
 type HeaderProps = {
@@ -15,11 +17,21 @@ type HeaderProps = {
 
 const Header = ({ websiteTitle, isUserLoggedIn, icon }: HeaderProps) => {
   const [isShowOverlay, setShowOverlay] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isActionComplete, setActionComplete] = useState(false);
   const router = useRouter();
 
-  const signOutUser = () => {
-    cookie.remove(process.env.JWT_KEY as string);
-    router.push("/login");
+  const logoutUser = async () => {
+    try {
+      cookie.remove(process.env.JWT_KEY as string);
+      setActionComplete(true);
+      setTimeout(() => {
+        setModalOpen(false);
+        router.push("/login");
+      }, 2000);
+    } catch (err) {
+      console.log("Logout failed", err);
+    }
   };
 
   return (
@@ -29,13 +41,13 @@ const Header = ({ websiteTitle, isUserLoggedIn, icon }: HeaderProps) => {
           className={`${styles.main} ${isShowOverlay && styles.fixedHeader}`}
         >
           <div className={styles.logoTitleWrapper}>
-            <img src={icon} alt="icon" className={styles.icon} />
+            <img src={icon} alt="forum logo" className={styles.logo} />
             <Link href="/">{websiteTitle}</Link>
           </div>
 
           <div className={styles.rightHandSection}>
             <Navbar
-              onClick={signOutUser}
+              onClick={() => setModalOpen(true)}
               isUserLoggedIn={isUserLoggedIn}
               isInOverlay={false}
             />
@@ -53,12 +65,27 @@ const Header = ({ websiteTitle, isUserLoggedIn, icon }: HeaderProps) => {
             }`}
           >
             <Navbar
-              onClick={signOutUser}
+              onClick={() => setModalOpen(true)}
               isUserLoggedIn={isUserLoggedIn}
               isInOverlay={true}
             />
           </div>
         </header>
+
+        {isModalOpen && (
+          <Modal
+            text={
+              isActionComplete
+                ? "You have been successfully logged out."
+                : "Are you sure you want to log out?"
+            }
+            onConfirm={
+              !isActionComplete ? logoutUser : () => setModalOpen(false)
+            }
+            onCancel={() => setModalOpen(false)}
+            isActionComplete={isActionComplete}
+          />
+        )}
       </div>
     </>
   );

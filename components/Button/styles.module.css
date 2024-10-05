@@ -27,6 +27,20 @@
   border-color: rgb(239, 93, 93);
 }
 
+.neutral {
+  border-color: var(--secondary-color);
+  border-radius: 1rem;
+  color: rgb(48, 47, 47);
+  align-self: flex-end;
+  width: 70px;
+  padding: 0.5rem;
+}
+
+.neutral:hover {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+
 .filter {
   font-size: 0.8rem;
 }
@@ -36,9 +50,7 @@
   padding: 0.8rem 1.5rem;
 }
 
-/* ziureti del active gal pasikeiti i viena klase */
-.likeButton,
-.dislikeButton {
+.likeDislikeBtn {
   all: unset;
   border-radius: 50%;
   cursor: pointer;

@@ -3,14 +3,13 @@ import likeBtn from "../../assets/like-btn.svg";
 import dislikeBtn from "../../assets/dislike-btn.svg";
 import { useState } from "react";
 import Button from "../Button/Button";
+import { formatDate } from "../../utils/dateFormatter";
 import {
   postDislikeAnswer,
   postLikeAnswer,
   fetchNetScore as fetchNetScoreApi,
   deleteAnswer as deleteAnswerApi,
 } from "../../apiCalls/answer";
-import { useRouter } from "next/router";
-// import { AxiosError } from "axios";
 import Modal from "../Modal/Modal";
 
 // pass the Answer object to type Props?
@@ -20,11 +19,11 @@ type AnswerProps = {
   answerText: string;
   date: string;
   gainedLikesNumber: number;
-  // questionId: string;
   userId: string;
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
   userName: string;
+  // questionId: string;
   // ?
   refetchData: () => void;
 };
@@ -40,15 +39,9 @@ const Answer = ({
   userName,
   refetchData,
 }: AnswerProps) => {
-  const dateObj = new Date(date);
-  const formattedDate = dateObj.toLocaleDateString();
   const [netScoreLikes, setNetScoreLikes] = useState(gainedLikesNumber);
-
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
-
-  // const router = useRouter();
-
+  const [isActionComplete, setActionComplete] = useState(false);
   const [message, setMessage] = useState("");
 
   // paprasta delete funcija
@@ -58,45 +51,18 @@ const Answer = ({
       const response = await deleteAnswerApi(id);
 
       if (response.status === 200) {
-        setIsDeleted(true);
+        setActionComplete(true);
         setTimeout(() => {
           setModalOpen(false);
           refetchData();
         }, 2000);
       }
     } catch (err) {
-      console.log("Error deleting answer:", err);
+      console.log("Error deleting answer", err);
     }
   };
 
-  // delete su axios error zinute, jei vartotot jwt galiojimas baigesi
-  // const deleteAnswer = async (id: string) => {
-  //   try {
-  //     const response = await deleteAnswerApi(id);
-
-  //     if (response.status === 200) {
-  //       setIsDeleted(true);
-  //       setTimeout(() => {
-  //         setModalOpen(false);
-  //         refetchData();
-  //       }, 2000);
-  //     }
-  //   } catch (err) {
-  //     const axiosError = err as AxiosError;
-
-  //     if (axiosError.response?.status === 401) {
-  //       setMessage("Your session has expired. Please log in again.");
-
-  //       setTimeout(() => {
-  //         router.push("/login");
-  //       }, 2000);
-  //     } else {
-  //       console.log("Error deleting answer", err);
-  //     }
-  //   }
-  // };
-
-  const fetchNetScore = async () => {
+  const fetchNetScore = async (id: string) => {
     try {
       const response = await fetchNetScoreApi(id);
       if (response.status === 200) {
@@ -107,7 +73,7 @@ const Answer = ({
     }
   };
 
-  const handleLike = async () => {
+  const handleLike = async (id: string) => {
     if (!isUserLoggedIn) {
       setMessage("Log in to interact!");
       return;
@@ -116,14 +82,14 @@ const Answer = ({
       const response = await postLikeAnswer(id);
 
       if (response.status === 200) {
-        await fetchNetScore();
+        await fetchNetScore(id);
       }
     } catch (err) {
       console.log("Error liking the answer:", err);
     }
   };
 
-  const handleDislike = async () => {
+  const handleDislike = async (id: string) => {
     if (!isUserLoggedIn) {
       setMessage("Log in to interact!");
       return;
@@ -132,7 +98,7 @@ const Answer = ({
       const response = await postDislikeAnswer(id);
 
       if (response.status === 200) {
-        await fetchNetScore();
+        await fetchNetScore(id);
       }
     } catch (err) {
       console.log("Error disliking the answer:", err);
@@ -142,16 +108,20 @@ const Answer = ({
   return (
     <div className={styles.main}>
       <div className={styles.reactionBtnWrapper}>
-        <Button onClick={handleLike} icon={likeBtn.src} type="LIKE" />
+        <Button onClick={() => handleLike(id)} icon={likeBtn.src} type="VOTE" />
         <h4 className={styles.votes}>{netScoreLikes}</h4>
-        <Button onClick={handleDislike} icon={dislikeBtn.src} type="DISLIKE" />
+        <Button
+          onClick={() => handleDislike(id)}
+          icon={dislikeBtn.src}
+          type="VOTE"
+        />
       </div>
 
       <div className={styles.answerContent}>
         <p>{answerText}</p>
         <div className={styles.userDateWrapper}>
           <h5>{userName}</h5>
-          <h5>{formattedDate}</h5>
+          <h5>{formatDate(date)}</h5>
         </div>
       </div>
 
@@ -169,15 +139,17 @@ const Answer = ({
       {isModalOpen && (
         <Modal
           text={
-            isDeleted
+            isActionComplete
               ? "The answer has been successfully deleted."
               : "Are you sure you want to delete your answer?"
           }
           onConfirm={
-            !isDeleted ? () => deleteAnswer(id) : () => setModalOpen(false)
+            !isActionComplete
+              ? () => deleteAnswer(id)
+              : () => setModalOpen(false)
           }
           onCancel={() => setModalOpen(false)}
-          isDeleted={isDeleted}
+          isActionComplete={isActionComplete}
         />
       )}
     </div>

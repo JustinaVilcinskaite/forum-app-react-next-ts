@@ -92,12 +92,7 @@ const QuestionForm = () => {
           }}
         />
 
-        <Button
-          isLoading={false}
-          isActive={false}
-          title="Sumbit"
-          onClick={postQuestion}
-        />
+        <Button title="Sumbit" onClick={postQuestion} />
 
         {message && <Message text={message} isError={isError} />}
       </div>

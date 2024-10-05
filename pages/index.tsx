@@ -10,6 +10,7 @@ import styles from "../styles/Home.module.css";
 const MainPage = () => {
   //
   const [questions, setQuestions] = useState<Question[]>([]);
+
   const [filter, setFilter] = useState<"all" | "answered" | "unanswered">(
     "all"
   );
@@ -17,7 +18,7 @@ const MainPage = () => {
   const fetchQuestions = async () => {
     try {
       const response = await fetchQuestionsApi();
-
+      console.log(response.data);
       setQuestions(response.data.questions);
     } catch (err) {
       console.log(err);
@@ -34,6 +35,7 @@ const MainPage = () => {
     return questions;
   };
 
+  // ?
   return (
     <PageTemplate>
       <div className={styles.controlBarWrapper}>
@@ -45,14 +47,6 @@ const MainPage = () => {
         <QuestionNavBar />
       </div>
 
-      {/* 
-      <QuestionControlBar
-        filterAll={() => setFilter("all")}
-        filterAnswered={() => setFilter("answered")}
-        filterUnanswered={() => setFilter("unanswered")}
-      /> */}
-
-      {/* ???????? */}
       <QuestionsWrapper questions={getFilteredQuestions()} />
     </PageTemplate>
   );

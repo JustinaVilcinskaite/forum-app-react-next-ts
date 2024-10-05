@@ -14,6 +14,7 @@ type PageTemplateProps = {
 
 const PageTemplate = ({ children, isProtected = false }: PageTemplateProps) => {
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
+
   const router = useRouter();
   // del sitos vietos dar pagalvoti
   // const hiddenPaths = ["/login", "/signup", "/post-question"];
@@ -72,10 +73,7 @@ const PageTemplate = ({ children, isProtected = false }: PageTemplateProps) => {
         isUserLoggedIn={isUserLoggedIn}
       />
 
-      {/* <div className={styles.bar}>
-        <Bar1 />
-        <Bar2 />
-      </div> */}
+      {/* {isUserLoggedIn && <NavBarAuthUser />} */}
 
       <div className={styles.main}>{children}</div>
       <Footer copyrightText="&copy; Forum" />

@@ -51,7 +51,7 @@ const LoginForm = () => {
   return (
     <div className={styles.main}>
       <div className={styles.form}>
-        <h1>Login</h1>
+        <h1>Log in to Forum</h1>
 
         <input
           type="email"
@@ -70,12 +70,7 @@ const LoginForm = () => {
           }}
         />
 
-        <Button
-          onClick={loginUser}
-          isActive={false}
-          title="Login"
-          isLoading={isButtonLoading}
-        />
+        <Button onClick={loginUser} title="Login" isLoading={isButtonLoading} />
 
         <AuthRedirectLink
           text="Do not have an account yet?"

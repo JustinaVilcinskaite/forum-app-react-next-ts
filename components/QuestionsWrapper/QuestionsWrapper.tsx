@@ -26,7 +26,6 @@ const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
           <div className={styles.message}>
             <h4>No questions yet...</h4>
           </div>
-          // <h4 className={styles.message}>No questions available</h4>
         )
       ) : (
         <SpinnerMain />
@@ -76,3 +75,28 @@ export default QuestionsWrapper;
 //       })}
 //   </div>
 // );
+
+// loader
+
+{
+  /* <div className={styles.main}>
+{loading ? ( // Show spinner if loading
+  <SpinnerMain />
+) : questions.length > 0 ? (
+  questions.map((question) => (
+    <QuestionCard
+      key={question.id}
+      id={question.id}
+      questionTitle={question.questionTitle}
+      questionText={question.questionText}
+      date={question.date}
+      userName={question.userName}
+    />
+  ))
+) : (
+  <div className={styles.message}>
+    <h4>No questions yet...</h4>
+  </div>
+)}
+</div> */
+}

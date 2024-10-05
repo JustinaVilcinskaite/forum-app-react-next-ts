@@ -23,6 +23,8 @@ const QuestionWithAnswersPage = () => {
     try {
       const response = await fetchQuestionWithAnswersApi(id);
 
+      console.log(response.data);
+
       setQuestion(response.data.question);
       setAnswers(response.data.answers);
     } catch (err) {
