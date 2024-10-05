@@ -7,6 +7,7 @@ import { validateAnswer } from "../../dataValidations/answerValidation";
 import Message from "../Message/Message";
 
 type AnswerFormProps = {
+  questionId: string;
   isUserLoggedIn: boolean;
   refetchData: () => void;
 };
@@ -16,7 +17,7 @@ const AnswerForm = ({ isUserLoggedIn, refetchData }: AnswerFormProps) => {
   const [message, setMessage] = useState("");
   const [isError, setError] = useState(false);
   const router = useRouter();
-  // ?
+
   const questionId = router.query.id as string;
 
   const postAnswer = async () => {

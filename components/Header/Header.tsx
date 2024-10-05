@@ -27,7 +27,7 @@ const Header = ({ websiteTitle, isUserLoggedIn, icon }: HeaderProps) => {
       setActionComplete(true);
       setTimeout(() => {
         setModalOpen(false);
-        router.push("/login");
+        router.push("/");
       }, 2000);
     } catch (err) {
       console.log("Logout failed", err);

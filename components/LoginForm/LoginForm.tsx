@@ -35,7 +35,7 @@ const LoginForm = () => {
         setMessage("Login successful! Redirecting...");
 
         setTimeout(() => {
-          router.push("/");
+          router.push("/questions");
         }, 1000);
 
         setButtonLoading(false);

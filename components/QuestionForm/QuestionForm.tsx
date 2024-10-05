@@ -1,9 +1,8 @@
 import styles from "./styles.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Button from "../Button/Button";
 import { postQuestion as postQuestionApi } from "../../apiCalls/question";
-// import { validateUser as validateUserApi } from "../../apiCalls/user";
 import { validateQuestion } from "../../dataValidations/questionValidation";
 import Message from "../Message/Message";
 
@@ -13,34 +12,13 @@ const QuestionForm = () => {
   const [message, setMessage] = useState("");
   const [isError, setError] = useState(false);
 
-  //   const [isShowError, setShowError] = useState(false);
-  //   const [isShowSuccess, setShowSuccess] = useState(false);
-
   const router = useRouter();
-
-  //   later refactor, DRY
-  // ar cia palikti funkcija
-
-  // const validateUser = async () => {
-  //   try {
-  //     const response = await validateUserApi();
-
-  //     if (response.status !== 200) {
-  //       router.push("/login");
-  //     }
-
-  //     //   setUserLoggedIn(true);
-  //   } catch (err) {
-  //     router.push("/login");
-  //     console.log(err);
-  //   }
-  // };
 
   const postQuestion = async () => {
     const validationMessage = validateQuestion({ questionTitle, questionText });
     if (validationMessage) {
       setMessage(validationMessage);
-      setError(true); // Set success to false if validation fails
+      setError(true);
       return;
     }
 
@@ -49,13 +27,13 @@ const QuestionForm = () => {
         questionTitle,
         questionText,
       });
-      //   TODO:fix this
+
       if (response.status === 201) {
         setError(false);
         setMessage("Question posted successfully!");
 
         setTimeout(() => {
-          router.push("/");
+          router.push("/questions");
         }, 2000);
       }
     } catch (err) {
@@ -64,13 +42,6 @@ const QuestionForm = () => {
       setError(true);
     }
   };
-
-  // useEffect(() => {
-  //   // if (!jwt) {
-  //   //     router.push("/login");
-  //   //   }
-  //   validateUser();
-  // }, []);
 
   return (
     <div className={styles.main}>

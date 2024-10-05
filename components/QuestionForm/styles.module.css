@@ -3,14 +3,13 @@
   height: calc(100vh - 120px - 60px);
   background-color: var(--primary-color);
   border-radius: 0.6rem;
-  /* margin-bottom: 0.3rem; */
   margin-top: 0.3rem;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
   margin: 0 auto;
   gap: 1.5rem;
@@ -26,16 +25,12 @@
 }
 
 .form input {
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .form textarea {
-  height: 100px;
-  padding: 0.5rem;
+  height: 160px;
+  padding: 1rem;
   resize: none;
   font-family: "Open Sans", sans-serif;
 }
-
-/* @media (max-width: 768px) {
- 
-} */

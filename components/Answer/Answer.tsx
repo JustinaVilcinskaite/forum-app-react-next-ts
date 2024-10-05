@@ -12,8 +12,6 @@ import {
 } from "../../apiCalls/answer";
 import Modal from "../Modal/Modal";
 
-// pass the Answer object to type Props?
-
 type AnswerProps = {
   id: string;
   answerText: string;
@@ -23,8 +21,6 @@ type AnswerProps = {
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
   userName: string;
-  // questionId: string;
-  // ?
   refetchData: () => void;
 };
 
@@ -128,7 +124,6 @@ const Answer = ({
       {isUserLoggedIn && loggedInUserId === userId && (
         <Button
           title="Delete"
-          // onClick={deleteAnswer}
           onClick={() => setModalOpen(true)}
           type="DANGER"
         />

@@ -14,10 +14,12 @@
   margin-top: 5rem;
   max-width: 650px;
   width: 100%;
+  height: 540px;
   margin: 0 auto;
   gap: 1.5rem;
   padding: 6rem;
   background-color: var(--primary-color);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 0.6rem;
 }
 
@@ -29,4 +31,11 @@
 
 .form input {
   padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .form {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 }

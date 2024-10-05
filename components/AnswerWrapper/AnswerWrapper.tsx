@@ -26,8 +26,6 @@ const AnswersWrapper = ({
             answerText={answer.answerText}
             date={answer.date}
             gainedLikesNumber={answer.gainedLikesNumber}
-            // questionId={answer.questionId}
-            // ?????? do i need to pas the userId here
             userId={answer.userId}
             loggedInUserId={loggedInUserId}
             isUserLoggedIn={isUserLoggedIn}
@@ -43,29 +41,3 @@ const AnswersWrapper = ({
 };
 
 export default AnswersWrapper;
-
-// const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
-//   return (
-//     <div className={styles.main}>
-//       {questions ? (
-//         questions.length ? (
-//           questions.map((question) => (
-//             <QuestionCard
-//               key={question.id}
-//               id={question.id}
-//               questionTitle={question.questionTitle}
-//               questionText={question.questionText}
-//               date={question.date}
-//             />
-//           ))
-//         ) : (
-//           <h4>No questions available</h4>
-//         )
-//       ) : (
-//         <Spinner />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default QuestionsWrapper;

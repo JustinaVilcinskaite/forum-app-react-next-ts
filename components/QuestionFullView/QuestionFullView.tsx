@@ -65,12 +65,9 @@ const Question = ({
         </div>
       </div>
 
-      {/* <h5>{new Date(date).toLocaleDateString()}</h5> */}
-
       {isUserLoggedIn && loggedInUserId === userId && (
         <Button
           title="Delete"
-          // onClick={deleteQuestion}
           onClick={() => setModalOpen(true)}
           type="DANGER"
         />

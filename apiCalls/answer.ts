@@ -34,15 +34,6 @@ export const fetchQuestionWithAnswers = async (id: string) => {
   return response;
 };
 
-export const fetchUserAnswers = async () => {
-  const headers = getAuthHeaders();
-  const response = await axios.get(`${process.env.SERVER_URL}/answers/users`, {
-    headers,
-  });
-
-  return response;
-};
-
 export const deleteAnswer = async (id: string) => {
   const headers = getAuthHeaders();
 

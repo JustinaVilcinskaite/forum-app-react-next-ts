@@ -11,7 +11,6 @@ import { validateUser as validateUserApi } from "../../apiCalls/user";
 import QuestionNavBar from "../../components/QuestionNavBar/QuestionNavBar";
 
 const QuestionWithAnswersPage = () => {
-  //
   const [question, setQuestion] = useState<Question | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
@@ -52,8 +51,6 @@ const QuestionWithAnswersPage = () => {
     }
   }, [router.query.id]);
 
-  //TODO: Spinner
-
   return (
     <PageTemplate>
       <>
@@ -65,7 +62,6 @@ const QuestionWithAnswersPage = () => {
             questionText={question.questionText}
             userName={question.userName}
             date={question.date}
-            // why userId
             userId={question.userId}
             loggedInUserId={loggedInUserId}
             isUserLoggedIn={isUserLoggedIn}
@@ -80,9 +76,8 @@ const QuestionWithAnswersPage = () => {
           }
         />
 
-        {/* problema??? */}
         <AnswerForm
-          // questionId={router.query.id as string}
+          questionId={router.query.id as string}
           isUserLoggedIn={isUserLoggedIn}
           refetchData={() =>
             fetchQuestionWithAnswers(router.query.id as string)
