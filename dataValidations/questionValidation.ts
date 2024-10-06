@@ -16,7 +16,7 @@ export const validateQuestion = ({
   }
 
   if (questionTitle.length > 50) {
-    return "Question title must be at most 30 characters long.";
+    return "Question title must be at most 50 characters long.";
   }
 
   if (questionText.length < 20) {

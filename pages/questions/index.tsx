@@ -8,7 +8,6 @@ import QuestionFilterBar from "../../components/QuestionFilterBar/QuestionFilter
 import styles from "./styles.module.css";
 
 const QuestionsPage = () => {
-  //
   const [questions, setQuestions] = useState<Question[]>([]);
 
   const [filter, setFilter] = useState<"all" | "answered" | "unanswered">(
@@ -35,7 +34,6 @@ const QuestionsPage = () => {
     return questions;
   };
 
-  // ?
   return (
     <PageTemplate>
       <div className={styles.controlBarWrapper}>

@@ -12,8 +12,6 @@ type ButtonProps = {
 
 const Button = ({ onClick, title, isLoading, type, icon }: ButtonProps) => {
   return (
-    // gal reiks pasikeisti like dislike
-
     <button
       className={`
       ${styles.main} 

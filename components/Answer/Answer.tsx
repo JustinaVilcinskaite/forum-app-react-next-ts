@@ -40,8 +40,6 @@ const Answer = ({
   const [isActionComplete, setActionComplete] = useState(false);
   const [message, setMessage] = useState("");
 
-  // paprasta delete funcija
-  // id: string reikalinga ?
   const deleteAnswer = async (id: string) => {
     try {
       const response = await deleteAnswerApi(id);

@@ -26,6 +26,10 @@
 .error {
   font-size: 0.9rem;
   color: var(--danger-color);
+  position: absolute;
+
+  bottom: 0.5rem;
+  left: 2rem;
 }
 
 .answerContent {
@@ -62,6 +66,10 @@
   }
 
   .userDateWrapper {
+    font-size: 0.8rem;
+  }
+
+  .error {
     font-size: 0.8rem;
   }
 }

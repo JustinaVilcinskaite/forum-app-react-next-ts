@@ -6,19 +6,15 @@ import { deleteQuestion as deleteQuestionApi } from "../../apiCalls/question";
 import { formatDate } from "../../utils/dateFormatter";
 import Modal from "../Modal/Modal";
 
-// pass the Question object to type Props?
-
 type QuestionProps = {
   id: string;
   questionTitle: string;
   questionText: string;
   userName: string;
   date: string;
-  userId: string; // user who posted the question
+  userId: string;
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
-
-  //   question: Question;
 };
 
 const Question = ({
@@ -44,7 +40,7 @@ const Question = ({
 
         setTimeout(() => {
           setModalOpen(false);
-          router.push("/");
+          router.push("/questions");
         }, 2000);
       }
     } catch (err) {

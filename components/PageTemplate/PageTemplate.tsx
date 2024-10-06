@@ -40,7 +40,7 @@ const PageTemplate = ({ children, isProtected = false }: PageTemplateProps) => {
 
   useEffect(() => {
     validateUser();
-  }, [isProtected]);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -49,7 +49,6 @@ const PageTemplate = ({ children, isProtected = false }: PageTemplateProps) => {
         icon={forumLogo.src}
         isUserLoggedIn={isUserLoggedIn}
       />
-
       <div className={styles.main}>{children}</div>
       <Footer copyrightText="&copy; Forum" />
     </div>

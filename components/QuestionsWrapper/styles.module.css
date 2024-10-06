@@ -17,7 +17,7 @@
 
 .message {
   width: 100%;
-  height: calc(100vh - 120px - 60px - 80px);
+  height: calc(100vh - 130px - 60px - 9.6px);
   display: flex;
   align-items: center;
   justify-content: center;

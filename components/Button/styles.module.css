@@ -29,7 +29,7 @@
 }
 
 .neutral {
-  border-color: var(--secondary-color);
+  border-color: rgb(48, 47, 47);
   border-radius: 1rem;
   color: rgb(48, 47, 47);
   align-self: flex-end;
@@ -38,7 +38,7 @@
 }
 
 .neutral:hover {
-  border-color: var(--secondary-color);
+  border-color: rgb(48, 47, 47);
   color: var(--secondary-color);
 }
 

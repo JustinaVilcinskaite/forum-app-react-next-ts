@@ -1,6 +1,6 @@
 .main {
   background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  height: calc(100vh - 130px - 60px);
+  height: calc(100vh - 130px - 60px - 9.6px);
   border-radius: 0.6rem;
   margin-top: 0.3rem;
   display: flex;
@@ -67,18 +67,11 @@
 }
 
 @media (max-width: 768px) {
+  .main {
+    gap: 0.5rem;
+  }
   .main h1 {
     font-size: 1.8rem;
-  }
-
-  .main h2 {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .main h1 {
-    font-size: 1.4rem;
   }
 
   .main h2 {
