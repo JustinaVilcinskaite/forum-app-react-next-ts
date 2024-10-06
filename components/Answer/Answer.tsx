@@ -7,7 +7,6 @@ import { formatDate } from "../../utils/dateFormatter";
 import {
   postDislikeAnswer,
   postLikeAnswer,
-  fetchNetScore as fetchNetScoreApi,
   deleteAnswer as deleteAnswerApi,
 } from "../../apiCalls/answer";
 import Modal from "../Modal/Modal";
@@ -21,7 +20,7 @@ type AnswerProps = {
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
   userName: string;
-  refetchData: () => void;
+  onRemoveAnswer: (answerId: string) => void;
 };
 
 const Answer = ({
@@ -33,7 +32,7 @@ const Answer = ({
   loggedInUserId,
   isUserLoggedIn,
   userName,
-  refetchData,
+  onRemoveAnswer,
 }: AnswerProps) => {
   const [netScoreLikes, setNetScoreLikes] = useState(gainedLikesNumber);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -48,22 +47,11 @@ const Answer = ({
         setActionComplete(true);
         setTimeout(() => {
           setModalOpen(false);
-          refetchData();
+          onRemoveAnswer(id);
         }, 2000);
       }
     } catch (err) {
       console.log("Error deleting answer", err);
-    }
-  };
-
-  const fetchNetScore = async (id: string) => {
-    try {
-      const response = await fetchNetScoreApi(id);
-      if (response.status === 200) {
-        setNetScoreLikes(response.data.gainedLikesNumber);
-      }
-    } catch (err) {
-      console.log("Error fetching like/dislike status:", err);
     }
   };
 
@@ -76,10 +64,10 @@ const Answer = ({
       const response = await postLikeAnswer(id);
 
       if (response.status === 200) {
-        await fetchNetScore(id);
+        setNetScoreLikes(response.data.gainedLikesNumber);
       }
     } catch (err) {
-      console.log("Error liking the answer:", err);
+      console.log("Error liking the answer", err);
     }
   };
 
@@ -92,10 +80,10 @@ const Answer = ({
       const response = await postDislikeAnswer(id);
 
       if (response.status === 200) {
-        await fetchNetScore(id);
+        setNetScoreLikes(response.data.gainedLikesNumber);
       }
     } catch (err) {
-      console.log("Error disliking the answer:", err);
+      console.log("Error disliking the answer", err);
     }
   };
 

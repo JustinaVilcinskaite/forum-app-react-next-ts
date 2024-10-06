@@ -36,12 +36,12 @@ const Question = ({
       const response = await deleteQuestionApi(id);
 
       if (response.status === 200) {
-        setActionComplete(true);
-
         setTimeout(() => {
           setModalOpen(false);
           router.push("/questions");
         }, 2000);
+
+        setActionComplete(true);
       }
     } catch (err) {
       console.log("Error deleting question", err);

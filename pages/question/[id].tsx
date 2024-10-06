@@ -21,9 +21,6 @@ const QuestionWithAnswersPage = () => {
   const fetchQuestionWithAnswers = async (id: string) => {
     try {
       const response = await fetchQuestionWithAnswersApi(id);
-
-      console.log(response.data);
-
       setQuestion(response.data.question);
       setAnswers(response.data.answers);
     } catch (err) {
@@ -51,39 +48,45 @@ const QuestionWithAnswersPage = () => {
     }
   }, [router.query.id]);
 
+  const refetchData = () => {
+    if (router.query.id) {
+      fetchQuestionWithAnswers(router.query.id as string);
+    }
+  };
+
+  const removeAnswer = (answerId: string) => {
+    setAnswers((prevAnswers) =>
+      prevAnswers.filter((answer) => answer.id !== answerId)
+    );
+  };
+
   return (
     <PageTemplate>
-      <>
-        <QuestionNavBar />
-        {question && (
-          <QuestionFullView
-            id={question.id}
-            questionTitle={question.questionTitle}
-            questionText={question.questionText}
-            userName={question.userName}
-            date={question.date}
-            userId={question.userId}
-            loggedInUserId={loggedInUserId}
-            isUserLoggedIn={isUserLoggedIn}
-          />
-        )}
-        <AnswersWrapper
-          answers={answers}
+      <QuestionNavBar />
+      {question && (
+        <QuestionFullView
+          id={question.id}
+          questionTitle={question.questionTitle}
+          questionText={question.questionText}
+          userName={question.userName}
+          date={question.date}
+          userId={question.userId}
           loggedInUserId={loggedInUserId}
           isUserLoggedIn={isUserLoggedIn}
-          refetchData={() =>
-            fetchQuestionWithAnswers(router.query.id as string)
-          }
         />
+      )}
+      <AnswersWrapper
+        answers={answers}
+        loggedInUserId={loggedInUserId}
+        isUserLoggedIn={isUserLoggedIn}
+        onRemoveAnswer={removeAnswer}
+      />
 
-        <AnswerForm
-          questionId={router.query.id as string}
-          isUserLoggedIn={isUserLoggedIn}
-          refetchData={() =>
-            fetchQuestionWithAnswers(router.query.id as string)
-          }
-        />
-      </>
+      <AnswerForm
+        questionId={router.query.id as string}
+        isUserLoggedIn={isUserLoggedIn}
+        refetchData={refetchData}
+      />
     </PageTemplate>
   );
 };

@@ -67,11 +67,3 @@ export const postDislikeAnswer = async (id: string) => {
   );
   return response;
 };
-
-export const fetchNetScore = async (id: string) => {
-  const response = await axios.get(
-    `${process.env.SERVER_URL}/answers/${id}/net-score`
-  );
-
-  return response;
-};

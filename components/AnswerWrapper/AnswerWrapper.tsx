@@ -6,14 +6,14 @@ type AnswersWrapperProps = {
   answers: AnswerProps[];
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
-  refetchData: () => void;
+  onRemoveAnswer: (answerId: string) => void;
 };
 
 const AnswersWrapper = ({
   answers,
   loggedInUserId,
   isUserLoggedIn,
-  refetchData,
+  onRemoveAnswer,
 }: AnswersWrapperProps) => {
   return (
     <div className={styles.main}>
@@ -30,7 +30,7 @@ const AnswersWrapper = ({
             loggedInUserId={loggedInUserId}
             isUserLoggedIn={isUserLoggedIn}
             userName={answer.userName}
-            refetchData={refetchData}
+            onRemoveAnswer={onRemoveAnswer}
           />
         ))
       ) : (

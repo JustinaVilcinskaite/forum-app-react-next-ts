@@ -14,7 +14,6 @@
 }
 
 .danger {
-  /* border-color: rgb(239, 93, 93); */
   border-color: var(--danger-color);
   border-radius: 1rem;
   color: rgb(48, 47, 47);

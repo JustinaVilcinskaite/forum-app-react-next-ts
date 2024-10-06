@@ -46,8 +46,8 @@ const AnswerForm = ({ isUserLoggedIn, refetchData }: AnswerFormProps) => {
         setAnswerText("");
 
         setTimeout(() => {
-          setMessage("");
           refetchData();
+          setMessage("");
         }, 1000);
       }
     } catch (err) {
