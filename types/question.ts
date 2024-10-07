@@ -4,6 +4,6 @@ export type Question = {
   questionText: string;
   date: string;
   userId: string;
+  name: string;
   isAnswered: boolean;
-  userName: string;
 };

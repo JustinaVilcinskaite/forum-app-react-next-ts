@@ -7,5 +7,5 @@ export type Answer = {
   dislikedBy: string[];
   questionId: string;
   userId: string;
-  userName: string;
+  name: string;
 };

@@ -7,7 +7,7 @@ type QuestionCardProps = {
   questionTitle: string;
   questionText: string;
   date: string;
-  userName: string;
+  name: string;
 };
 
 const QuestionCard = ({
@@ -15,7 +15,7 @@ const QuestionCard = ({
   questionTitle,
   questionText,
   date,
-  userName,
+  name,
 }: QuestionCardProps) => {
   return (
     <Link href={`/question/${id}`} className={styles.main}>
@@ -24,7 +24,7 @@ const QuestionCard = ({
         <p>{questionText}</p>
       </div>
       <div className={styles.userDateWrapper}>
-        <h5>{userName}</h5>
+        <h5>{name}</h5>
         <h5>{formatDate(date)}</h5>
       </div>
     </Link>

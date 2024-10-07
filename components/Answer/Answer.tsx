@@ -19,7 +19,7 @@ type AnswerProps = {
   userId: string;
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
-  userName: string;
+  name: string;
   onRemoveAnswer: (answerId: string) => void;
 };
 
@@ -31,7 +31,7 @@ const Answer = ({
   userId,
   loggedInUserId,
   isUserLoggedIn,
-  userName,
+  name,
   onRemoveAnswer,
 }: AnswerProps) => {
   const [netScoreLikes, setNetScoreLikes] = useState(gainedLikesNumber);
@@ -102,7 +102,7 @@ const Answer = ({
       <div className={styles.answerContent}>
         <p>{answerText}</p>
         <div className={styles.userDateWrapper}>
-          <h5>{userName}</h5>
+          <h5>{name}</h5>
           <h5>{formatDate(date)}</h5>
         </div>
       </div>

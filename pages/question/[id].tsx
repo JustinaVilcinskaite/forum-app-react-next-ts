@@ -68,7 +68,7 @@ const QuestionWithAnswersPage = () => {
           id={question.id}
           questionTitle={question.questionTitle}
           questionText={question.questionText}
-          userName={question.userName}
+          name={question.name}
           date={question.date}
           userId={question.userId}
           loggedInUserId={loggedInUserId}

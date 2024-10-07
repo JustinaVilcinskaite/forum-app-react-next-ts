@@ -10,7 +10,7 @@ type QuestionProps = {
   id: string;
   questionTitle: string;
   questionText: string;
-  userName: string;
+  name: string;
   date: string;
   userId: string;
   loggedInUserId: string | null;
@@ -23,7 +23,7 @@ const Question = ({
   questionText,
   date,
   userId,
-  userName,
+  name,
   loggedInUserId,
   isUserLoggedIn,
 }: QuestionProps) => {
@@ -56,7 +56,7 @@ const Question = ({
           <p>{questionText}</p>
         </div>
         <div className={styles.userDateWrapper}>
-          <h5>{userName}</h5>
+          <h5>{name}</h5>
           <h5>{formatDate(date)}</h5>
         </div>
       </div>

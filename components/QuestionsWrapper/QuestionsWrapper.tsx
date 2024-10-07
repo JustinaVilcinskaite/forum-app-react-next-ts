@@ -12,16 +12,18 @@ const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
     <div className={styles.main}>
       {questions ? (
         questions.length ? (
-          questions.map((question) => (
-            <QuestionCard
-              key={question.id}
-              id={question.id}
-              questionTitle={question.questionTitle}
-              questionText={question.questionText}
-              date={question.date}
-              userName={question.userName}
-            />
-          ))
+          questions.map((question) => {
+            return (
+              <QuestionCard
+                key={question.id}
+                id={question.id}
+                questionTitle={question.questionTitle}
+                questionText={question.questionText}
+                date={question.date}
+                name={question.name}
+              />
+            );
+          })
         ) : (
           <div className={styles.message}>
             <h4>No questions yet...</h4>

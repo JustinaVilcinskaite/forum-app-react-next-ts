@@ -27,9 +27,9 @@ const AnswersWrapper = ({
             date={answer.date}
             gainedLikesNumber={answer.gainedLikesNumber}
             userId={answer.userId}
+            name={answer.name}
             loggedInUserId={loggedInUserId}
             isUserLoggedIn={isUserLoggedIn}
-            userName={answer.userName}
             onRemoveAnswer={onRemoveAnswer}
           />
         ))
