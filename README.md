@@ -78,9 +78,9 @@ The application uses client-side routing, modular components, and scoped CSS Mod
 
 ## Screenshots
 
-### Landing Page
+### Landing Page (Animated)
 
-![Landing Page](assets/screenshots/landing-page.png)
+![Landing Page Demo](assets/screenshots/landing-page-demo.gif)
 
 ### All Questions – Desktop
 
@@ -120,11 +120,11 @@ The application uses client-side routing, modular components, and scoped CSS Mod
 
 ### Mobile Navigation
 
-![Mobile Navigation](assets/screenshots/mobile-nav.png)
+<img src="assets/screenshots/mobile-navbar.png" alt="Mobile Navigation" width="250">
 
 ### All Questions – Mobile
 
-![Questions Mobile](assets/screenshots/questions-list-mobile.png)
+<img src="assets/screenshots/questions-list-mobile.png" alt="All Questions Mobile" width="250">
 
 ## Getting Started
 
@@ -155,10 +155,9 @@ The app will be available at `http://localhost:3000`.
 
 Make sure your backend server (`forum-api-node-express`) is running at `http://localhost:3002`.
 
-> **Note:** This is the frontend for a full-stack Q&A forum application.
-> To fully use the application, the corresponding backend (built with Node.js and Express) must also be running.
-> Refer to the forum-api-node-express repository for backend setup instructions.
-
+> **Note:** This is the frontend for a full-stack Q&A forum application.  
+> To fully use the application, the corresponding backend (built with Node.js and Express) must also be running.  
+> Refer to the [`forum-api-node-express`](https://github.com/JustinaVilcinskaite/forum-api-node-express) repository for backend setup instructions.
 
 ## Project Structure
 
