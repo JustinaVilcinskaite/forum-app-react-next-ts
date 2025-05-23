@@ -1,15 +1,6 @@
 .main {
-  /* display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 400px; */
-  /* gap: 1.5rem;
-  padding: 1rem; */
-  /* padding-top: 0.3rem; */
   border-radius: 0.6rem;
   background-color: var(--primary-color);
-  /* justify-content: center;
-  align-items: center; */
 
   margin-top: 0.3rem;
 }
