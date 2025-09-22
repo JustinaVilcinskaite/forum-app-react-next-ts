@@ -1,14 +1,12 @@
 import styles from "./styles.module.css";
 import Link from "next/link";
 import { formatDate } from "../../utils/dateFormatter";
+import type { Question } from "../../types/question";
 
-type QuestionCardProps = {
-  id: string;
-  questionTitle: string;
-  questionText: string;
-  date: string;
-  name: string;
-};
+type QuestionCardProps = Pick<
+  Question,
+  "id" | "questionTitle" | "questionText" | "date" | "name"
+>;
 
 const QuestionCard = ({
   id,

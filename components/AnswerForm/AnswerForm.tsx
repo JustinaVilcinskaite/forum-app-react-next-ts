@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { postAnswer as postAnswerApi } from "../../apiCalls/answer";
-import { useRouter } from "next/router";
+
 import Button from "../Button/Button";
 import { validateAnswer } from "../../dataValidations/answerValidation";
 import Message from "../Message/Message";
@@ -12,13 +12,14 @@ type AnswerFormProps = {
   refetchData: () => void;
 };
 
-const AnswerForm = ({ isUserLoggedIn, refetchData }: AnswerFormProps) => {
+const AnswerForm = ({
+  questionId,
+  isUserLoggedIn,
+  refetchData,
+}: AnswerFormProps) => {
   const [answerText, setAnswerText] = useState("");
   const [message, setMessage] = useState("");
   const [isError, setError] = useState(false);
-  const router = useRouter();
-
-  const questionId = router.query.id as string;
 
   const postAnswer = async () => {
     if (!isUserLoggedIn) {

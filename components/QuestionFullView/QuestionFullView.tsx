@@ -4,15 +4,13 @@ import { useState } from "react";
 import Button from "../Button/Button";
 import { deleteQuestion as deleteQuestionApi } from "../../apiCalls/question";
 import { formatDate } from "../../utils/dateFormatter";
+import type { Question } from "../../types/question";
 import Modal from "../Modal/Modal";
 
-type QuestionProps = {
-  id: string;
-  questionTitle: string;
-  questionText: string;
-  name: string;
-  date: string;
-  userId: string;
+type QuestionProps = Pick<
+  Question,
+  "id" | "questionTitle" | "questionText" | "name" | "date" | "userId"
+> & {
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
 };

@@ -5,32 +5,29 @@ import SpinnerMain from "../SpinnerMain/SpinnerMain";
 
 type QuestionsWrapperProps = {
   questions: Question[];
+  isLoading: boolean;
 };
 
-const QuestionsWrapper = ({ questions }: QuestionsWrapperProps) => {
+const QuestionsWrapper = ({ questions, isLoading }: QuestionsWrapperProps) => {
   return (
     <div className={styles.main}>
-      {questions ? (
-        questions.length ? (
-          questions.map((question) => {
-            return (
-              <QuestionCard
-                key={question.id}
-                id={question.id}
-                questionTitle={question.questionTitle}
-                questionText={question.questionText}
-                date={question.date}
-                name={question.name}
-              />
-            );
-          })
-        ) : (
-          <div className={styles.message}>
-            <h4>No questions yet...</h4>
-          </div>
-        )
-      ) : (
+      {isLoading ? (
         <SpinnerMain />
+      ) : questions.length ? (
+        questions.map((q) => (
+          <QuestionCard
+            key={q.id}
+            id={q.id}
+            questionTitle={q.questionTitle}
+            questionText={q.questionText}
+            date={q.date}
+            name={q.name}
+          />
+        ))
+      ) : (
+        <div className={styles.message}>
+          <h4>No questions yet...</h4>
+        </div>
       )}
     </div>
   );

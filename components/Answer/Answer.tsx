@@ -11,15 +11,14 @@ import {
 } from "../../apiCalls/answer";
 import Modal from "../Modal/Modal";
 
-type AnswerProps = {
-  id: string;
-  answerText: string;
-  date: string;
-  gainedLikesNumber: number;
-  userId: string;
+import type { Answer as AnswerType } from "../../types/answer";
+
+type AnswerProps = Pick<
+  AnswerType,
+  "id" | "answerText" | "date" | "gainedLikesNumber" | "userId" | "name"
+> & {
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
-  name: string;
   onRemoveAnswer: (answerId: string) => void;
 };
 

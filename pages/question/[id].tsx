@@ -14,6 +14,7 @@ const QuestionWithAnswersPage = () => {
   const [question, setQuestion] = useState<Question | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
+
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
 
   const router = useRouter();
@@ -75,6 +76,7 @@ const QuestionWithAnswersPage = () => {
           isUserLoggedIn={isUserLoggedIn}
         />
       )}
+
       <AnswersWrapper
         answers={answers}
         loggedInUserId={loggedInUserId}
@@ -82,11 +84,13 @@ const QuestionWithAnswersPage = () => {
         onRemoveAnswer={removeAnswer}
       />
 
-      <AnswerForm
-        questionId={router.query.id as string}
-        isUserLoggedIn={isUserLoggedIn}
-        refetchData={refetchData}
-      />
+      {question && (
+        <AnswerForm
+          questionId={question.id}
+          isUserLoggedIn={isUserLoggedIn}
+          refetchData={refetchData}
+        />
+      )}
     </PageTemplate>
   );
 };

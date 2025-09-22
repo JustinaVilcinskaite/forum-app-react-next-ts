@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 import Answer from "../Answer/Answer";
-import { Answer as AnswerProps } from "../../types/answer";
+import type { Answer as AnswerType } from "../../types/answer";
 
 type AnswersWrapperProps = {
-  answers: AnswerProps[];
+  answers: AnswerType[];
   loggedInUserId: string | null;
   isUserLoggedIn: boolean;
   onRemoveAnswer: (answerId: string) => void;

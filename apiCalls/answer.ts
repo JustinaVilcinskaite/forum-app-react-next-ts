@@ -6,6 +6,7 @@ type PostAnswerProps = {
   questionId: string;
 };
 
+
 export const postAnswer = async ({
   answerText,
   questionId,
@@ -45,6 +46,7 @@ export const deleteAnswer = async (id: string) => {
 
   return response;
 };
+
 
 export const postLikeAnswer = async (id: string) => {
   const headers = getAuthHeaders();

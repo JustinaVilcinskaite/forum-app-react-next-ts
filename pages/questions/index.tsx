@@ -9,19 +9,21 @@ import styles from "./styles.module.css";
 
 const QuestionsPage = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "answered" | "unanswered">(
     "all"
   );
 
   const fetchQuestions = async () => {
+    setIsLoading(true);
     try {
       const response = await fetchQuestionsApi();
       console.log(response.data);
       setQuestions(response.data.questions);
     } catch (err) {
-      console.log(err);
+      console.log("Failed to load questions:", err);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -45,7 +47,10 @@ const QuestionsPage = () => {
         <QuestionNavBar />
       </div>
 
-      <QuestionsWrapper questions={getFilteredQuestions()} />
+      <QuestionsWrapper
+        questions={getFilteredQuestions()}
+        isLoading={isLoading}
+      />
     </PageTemplate>
   );
 };
