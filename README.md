@@ -80,51 +80,47 @@ The application uses client-side routing, modular components, and scoped CSS Mod
 
 ### Landing Page (Animated)
 
-![Landing Page Demo](assets/screenshots/landing-page-demo.gif)
+![Landing Page Demo](docs/screenshots/landing-page-demo.gif)
 
 ### All Questions – Desktop
 
-![Questions Desktop](assets/screenshots/questions-desktop.png)
+![Questions Desktop](docs/screenshots/questions-desktop.png)
 
 ### Question with Answers – Logged In
 
-![Question With Answers Logged In](assets/screenshots/question-with-answers-loggedin.png)
-
-### Question with Answers – Guest Errors
-
-![Question With Answers Guest Errors](assets/screenshots/question-with-answers-guest-errors.png)
+![Question With Answers Logged In](docs/screenshots/question-with-answers-loggedin.png)
 
 ### Question with Answers – Logged Out with Errors
 
-![Question With Answers Logged Out with Errors](assets/screenshots/question-with-answers-loggedout-errors.png)
+![Question With Answers Logged Out with Errors](docs/screenshots/question-with-answers-loggedout-errors.png)
 
 ### Sign Up Form
 
-![Sign Up Form](assets/screenshots/signup-form.png)
+![Sign Up Form](docs/screenshots/signup-form.png)
 
 ### Login Form
 
-![Login Form](assets/screenshots/login-form.png)
+![Login Form](docs/screenshots/login-form.png)
 
 ### Ask a Question Form
 
-![Ask Question](assets/screenshots/ask-question-form.png)
+![Ask Question](docs/screenshots/ask-question-form.png)
 
 ### Sign Up – Password Validation Error
 
-![Sign Up Validation Error](assets/screenshots/signup-validation-error.png)
+![Sign Up Validation Error](docs/screenshots/signup-validation-error.png)
 
 ### Logout Confirmation Modal
 
-![Logout Confirmation Modal](assets/screenshots/logout-confirmation-modal.png)
+![Logout Confirmation Modal](docs/screenshots/logout-confirmation-modal.png)
 
 ### Mobile Navigation
 
-<img src="assets/screenshots/mobile-navbar.png" alt="Mobile Navigation" width="250">
+<img src="docs/screenshots/mobile-navbar.png" alt="Mobile Navigation" width="250">
 
 ### All Questions – Mobile
 
-<img src="assets/screenshots/questions-list-mobile.png" alt="All Questions Mobile" width="250">
+<img src="docs/screenshots/questions-list-mobile.png" alt="All Questions Mobile" width="250">
 
 ## Getting Started
 
@@ -162,24 +158,34 @@ Make sure your backend server (`forum-api-node-express`) is running at `http://l
 ## Project Structure
 
 ```
+
 react-forum-app/
-├── apiCalls/             # Axios methods grouped by domain (user, question, answer)
-├── assets/               # Static SVG icons
-│   └── screenshots/      # UI screenshots used in the README
-├── components/           # UI components grouped by feature and view
+├── docs/                      # Documentation assets
+│   └── screenshots/           # UI screenshots shown in the README
+├── apiCalls/                  # Axios fetch requests grouped by feature
+├── assets/                    # Static UI icons used in components (SVG)
+├── components/                # Reusable UI building blocks
 │   ├── Answer/
-│   ├── QuestionForm/
 │   ├── Modal/
 │   ├── PageTemplate/
-│   └── ...
-├── dataValidations/      # Custom validators for form inputs
-├── pages/                # Next.js page routes (login, questions, etc.)
-├── public/               # Public static files
-├── styles/               # Global and module-scoped CSS
-├── types/                # Shared TypeScript interfaces and types
-├── utils/                # Utility functions (auth headers, formatters, etc.)
-├── next.config.mjs       # Next.js config with environment variables
+│   ├── QuestionForm/
+│   ├── ...
+├── dataValidations/           # Validation schemas for input forms
+├── pages/                     # Next.js page routes (routing automatically handled)
+│   ├── api/                   # Route handlers for server functions
+│   ├── login/                 # Login page route
+│   ├── post-question/         # Add question form route
+│   ├── question/              # Single question details route
+│   ├── questions/             # Main feed of questions
+│   └── signup/                # Signup page route
+├── public/                    # Assets served statically at the site root
+├── styles/                    # Global CSS + CSS modules
+├── types/                     # Shared TypeScript interfaces + app types
+├── utils/                     # Helper functions (tokens, API formatting, etc.)
+├── next.config.mjs            # Next.js configuration + env variables
+├── next-env.d.ts              # TypeScript environment declarations
 ├── package.json
 ├── tsconfig.json
 └── README.md
+
 ```
