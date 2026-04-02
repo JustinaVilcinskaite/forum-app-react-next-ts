@@ -5,7 +5,6 @@ import { signUp } from "../../apiCalls/user";
 import Button from "../Button/Button";
 import AuthRedirectLink from "../AuthRedirectLink/AuthRedirectLink";
 import { validateSignUp } from "../../dataValidations/signupValidation";
-
 import Message from "../Message/Message";
 
 const SignUpForm = () => {

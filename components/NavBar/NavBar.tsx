@@ -51,3 +51,4 @@ const Navbar = ({ onClick, isUserLoggedIn, isInOverlay }: NavbarProps) => {
 };
 
 export default Navbar;
+

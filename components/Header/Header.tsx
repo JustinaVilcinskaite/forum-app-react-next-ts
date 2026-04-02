@@ -36,7 +36,7 @@ const Header = ({ websiteTitle, isUserLoggedIn, icon }: HeaderProps) => {
 
   return (
     <>
-      <div className={`${isShowOverlay && "noScroll"}`}>
+      <div className={`${isShowOverlay && styles.noScroll}`}>
         <header
           className={`${styles.main} ${isShowOverlay && styles.fixedHeader}`}
         >
@@ -92,3 +92,4 @@ const Header = ({ websiteTitle, isUserLoggedIn, icon }: HeaderProps) => {
 };
 
 export default Header;
+
