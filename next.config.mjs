@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   env: {
-    SERVER_URL: "https://forum-api-node-express.onrender.com",
+    SERVER_URL: "http://localhost:3002",
     TOKEN_COOKIE_KEY: "forum_app_jwt",
   },
 };
