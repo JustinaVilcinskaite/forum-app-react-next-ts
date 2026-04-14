@@ -141,11 +141,12 @@ npm run dev
 
 The app will be available at `http://localhost:3000`.
 
-> **Note**: API URL and JWT key are configured in `next.config.mjs`.
+> **Note**: The API base URL and token cookie name are configured in `next.config.mjs`.  
+> If you run the frontend with a local backend, update the API base URL accordingly.
 
 ### 4. Run the Backend
 
-Make sure your backend server (`forum-api-node-express`) is running at `http://localhost:3002`.
+Make sure your backend server (`forum-api-node-express`) is running and that the frontend API base URL points to the correct backend environment.
 
 > **Note:** This is the frontend for a full-stack Q&A forum application.  
 > To fully use the application, the corresponding backend (built with Node.js and Express) must also be running.  
