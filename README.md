@@ -1,80 +1,76 @@
 # Forum App – React, Next.js & TypeScript
 
-A responsive frontend for a full-stack Q&A forum application, built with React, TypeScript, and Next.js. It enables users to register, log in, browse and post questions, submit answers, and interact through likes and dislikes — all within a modular, user-friendly interface that follows clean UI/UX principles.
+A responsive frontend for a full-stack Q&A forum application, built with React, TypeScript, and Next.js. It allows users to register, log in, browse and post questions, submit answers, and interact through likes and dislikes in a modular interface designed for desktop and mobile use.
 
 ## Project Overview
 
-This React and Next.js frontend serves as the client-side interface for a full-stack Q&A forum. It communicates with a secured RESTful API to support user registration, authentication, question posting, answer submission, and interactive features such as likes and dislikes.
+This frontend provides the client-side interface for a full-stack Q&A forum application. It communicates with a backend REST API to support user registration, authentication, question posting, answer submission, and answer reactions such as likes and dislikes.
 
-The application uses client-side routing, modular components, and scoped CSS Modules for maintainable styling. Authentication is managed via JWTs stored in cookies, with protected routes and conditional rendering based on login state. The layout is fully responsive and optimized for usability across both desktop and mobile devices.
+The application uses Next.js page-based routing, reusable components, and CSS Modules for styling. Authentication is handled with JWT tokens stored in cookies, and protected pages validate the user token before allowing access. The layout is responsive and built to work across desktop and mobile devices.
 
 ## Key Features
 
 ### Authentication & Session Management
 
-- Secure login and registration with custom client-side validation
-- JWT tokens stored in cookies using js-cookie for persistent sessions
-- Session is validated on page load; protected routes redirect unauthenticated users
-- Log out functionality with confirmation modal and automatic redirect
-- UI elements such as delete buttons conditionally render based on authentication state
+- Secure login and registration with client-side validation
+- JWT tokens stored in cookies using js-cookie
+- Protected pages validate the user token and redirect unauthenticated users to the login page
+- Logout flow includes a confirmation modal and redirect to the login page
+- UI elements such as delete buttons render conditionally based on login state
 
 ### Question Management
 
-- Authenticated users can submit new questions via controlled forms
+- Authenticated users can submit new questions through controlled forms
 - All users can browse a list of questions with titles, previews, authors, and timestamps
 - Questions can be filtered by status: All / Answered / Unanswered
 - Users can delete their own questions with confirmation modals
-- Question cards use dynamic routing (/question/[id]) and pass data via query
-- Questions automatically update their isAnswered status based on the presence or removal of answers
+- Question cards link to dynamic question detail pages
 
 ### Answer Management
 
-- All users (including unauthenticated) can view answers under a question
-- Authenticated users can post answers with form validation
-- Answers are displayed with the author's name, timestamp, and net like count
-- Answers are sorted by popularity (like count)
+- All users can view answers under a question
+- Authenticated users can post answers with client-side validation
+- Answers are displayed with the author's name, timestamp, and like score
+- Answers are sorted by popularity
 - Users can delete their own answers with confirmation modals
-- Submissions provide real-time feedback through confirmation or error messages
+- Submissions provide feedback through confirmation or error messages
 
 ### Likes & Dislikes
 
 - Authenticated users can like or dislike answers
 - Reactions are mutually exclusive and reversible
-- Interaction updates the like/dislike count in real time
-- Buttons visually reflect active state for user clarity
+- The interface updates reaction counts after each action
+- Buttons reflect active state for clearer user feedback
 
 ### UI/UX and Feedback
 
-- Fully responsive design optimized for mobile, tablet, and desktop
-- Loading indicators via custom spinners for API calls and form submissions
-- Validation errors and success messages shown in real-time
-- Modals used for confirmation prompts (logout, deletions, etc.)
-- Subtle animated element on the landing page for visual engagement
+- Responsive layout for mobile, tablet, and desktop
+- Loading indicators for API calls and form submissions
+- Validation errors and success messages shown in context
+- Modals used for confirmation prompts such as logout and deletions
+- Animated element on the landing page for visual engagement
 
 ### Validation & Error Handling
 
-- Custom validators for all form types (sign-up, login, question, answer)
-- Client-side validation prevents invalid data from being submitted
-- API errors are caught and shown to users with clear, contextual messages
+- Custom validators for sign-up, login, question, and answer forms
+- Client-side validation helps prevent invalid submissions
+- API errors are caught and shown with user-facing messages
 
 ### Architecture & Best Practices
 
-- Modular, reusable components (e.g., Button, Modal, Spinner, PageTemplate)
-- Domain-driven folder structure promoting separation of concerns
-- Scoped styles using CSS Modules for maintainable and collision-free styling
-- API communication abstracted in apiCalls/ by domain (user, question, answer)
-- Client-side route protection using isProtected flag and Next.js router
-- Shared layout components ensure consistent structure across views
+- Reusable components such as Button, Modal, Spinner, and PageTemplate
+- Feature-based API request helpers in `apiCalls/`
+- Scoped styling with CSS Modules
+- Protected page handling through `PageTemplate`
+- Shared layout components for a consistent structure across pages
 
 ## Technologies Used
 
-- **React** – Frontend library for building user interfaces
-- **Next.js** – Framework for routing and page rendering
-- **TypeScript** – Static typing for improved code quality and safety
-- **Axios** – HTTP client for communicating with the backend API
-- **js-cookie** – Cookie handling for storing and retrieving JWT tokens
-- **CSS Modules** – Scoped, modular component styling
-- **ESLint** – Code linting and consistency enforcement
+- **Frontend:** React, Next.js, TypeScript
+- **API Communication:** Axios
+- **Authentication:** js-cookie
+- **Styling:** CSS Modules
+- **Tooling:** ESLint
 
 ## Screenshots
 
@@ -158,34 +154,26 @@ Make sure your backend server (`forum-api-node-express`) is running at `http://l
 ## Project Structure
 
 ```
-
-react-forum-app/
-├── docs/                      # Documentation assets
-│   └── screenshots/           # UI screenshots shown in the README
-├── apiCalls/                  # Axios fetch requests grouped by feature
-├── assets/                    # Static UI icons used in components (SVG)
-├── components/                # Reusable UI building blocks
-│   ├── Answer/
-│   ├── Modal/
-│   ├── PageTemplate/
-│   ├── QuestionForm/
-│   ├── ...
-├── dataValidations/           # Validation schemas for input forms
-├── pages/                     # Next.js page routes (routing automatically handled)
-│   ├── api/                   # Route handlers for server functions
-│   ├── login/                 # Login page route
-│   ├── post-question/         # Add question form route
-│   ├── question/              # Single question details route
-│   ├── questions/             # Main feed of questions
-│   └── signup/                # Signup page route
-├── public/                    # Assets served statically at the site root
-├── styles/                    # Global CSS + CSS modules
-├── types/                     # Shared TypeScript interfaces + app types
-├── utils/                     # Helper functions (tokens, API formatting, etc.)
-├── next.config.mjs            # Next.js configuration + env variables
-├── next-env.d.ts              # TypeScript environment declarations
+forum-app-react-next-ts/
+├── docs/
+│   └── screenshots/       # README screenshots
+├── apiCalls/              # API request helpers
+├── assets/                # Static icons and images
+├── components/            # Reusable UI components
+├── dataValidations/       # Form validators
+├── pages/                 # Next.js pages and routes
+│   ├── login/
+│   ├── post-question/
+│   ├── question/
+│   ├── questions/
+│   └── signup/
+├── public/                # Public static assets
+├── styles/                # Global and modular styles
+├── types/                 # Shared TypeScript types
+├── utils/                 # Helper functions
+├── next.config.mjs
+├── next-env.d.ts
 ├── package.json
 ├── tsconfig.json
 └── README.md
-
 ```

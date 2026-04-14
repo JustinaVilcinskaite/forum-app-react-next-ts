@@ -30,7 +30,7 @@ const LoginForm = () => {
       const response = await login({ email, password });
 
       if (response.status === 200) {
-        cookie.set(process.env.JWT_KEY as string, response.data.token);
+        cookie.set(process.env.TOKEN_COOKIE_KEY as string, response.data.token);
         setError(false);
         setMessage("Login successful! Redirecting...");
 

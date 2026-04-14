@@ -23,7 +23,7 @@ const Header = ({ websiteTitle, isUserLoggedIn, icon }: HeaderProps) => {
 
   const logoutUser = async () => {
     try {
-      cookie.remove(process.env.JWT_KEY as string);
+      cookie.remove(process.env.TOKEN_COOKIE_KEY as string);
       setActionComplete(true);
       setTimeout(() => {
         setModalOpen(false);
